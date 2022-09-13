@@ -126,6 +126,7 @@ int main(int, char**)
         glBindVertexArray(VAO); 
         
         glUniform3f(vColor_uniform, 0.5, 0.5, 0.5);
+        
         // Start
         glDrawArrays(GL_TRIANGLES, 0, 30*10*2*3); // 30 Longitudes * 10 Latitude * 2 Traingles * 3 Vertices
         glUniform3f(vColor_uniform, 0.0, 0.0, 0.0);
@@ -194,25 +195,18 @@ void createCubeObject(unsigned int &program, unsigned int &cube_VAO)
 }
 
 // start
-GLfloat x_parametricSurface(float u, float v)
+// Change the equation for different surfaces. 
+std::vector<GLfloat> parametricSurface(float u, float v)
 {
-    int R = 20;
+    // Constant Radius
+    int R = 5;
+
     GLfloat x = R*cos(u);
-    return x;
-} 
-
-GLfloat y_parametricSurface(float u, float v)
-{
-    int R = 20;
     GLfloat y = R*sin(u);
-    return y;
-} 
-
-GLfloat z_parametricSurface(float u, float v)
-{
-    int R = 20;
     GLfloat z = v;
-    return z;
+
+    std::vector<GLfloat> ans = {x, y, z};
+    return ans;
 } 
 // end
 
@@ -238,33 +232,35 @@ void createParametricObject(unsigned int &program, unsigned int &shape_VAO)
     // You can directly generate coordinates for successive triangles in two nested for loops to scan over the surface.
 
 // Start
-// A sphere - r(u, v) = (pcos(u)sin(v), psin(u)sin(v), pcos(v))
-// 1 point 
+    // Specify the range of parameters
     float start_u = 0, start_v = 0, end_u = glm::pi<float>()*2, end_v = 10;
+
+    // Calculate the step size to make uniform size of rectangles
     float step_u = (end_u - start_u)/res_u, step_v = (end_v - start_v)/res_v;
     
     int index = 0;
     
+    // 2 Loops for 2 parameters.
     for (int j = 0; j < res_v; j++)
     {
         for (int i = 0; i < res_u; i++)
         {
+            // Calculate the current and next value for both parameters. 
             float u = i*step_u + start_u;
             float v = j*step_v + start_v;
             float u_next = (i+1 == res_u) ? end_u : (i+1)*step_u + start_u;
             float v_next = (j+1 == res_v) ? end_v : (j+1)*step_v + start_v;
 
-            
+            // Order of Triangles
             std::vector<float> order = {u, v, u_next, v, u, v_next, u_next, v_next, u, v_next, u_next, v};
 
+            // Calculate the coordinates of each triangles and add it to the array in correct order.
             for (int k = 0; k < order.size()-1; k += 2)
             {
-                GLfloat x = x_parametricSurface(order[k], order[k+1]);
-                GLfloat y = y_parametricSurface(order[k], order[k+1]);
-                GLfloat z = z_parametricSurface(order[k], order[k+1]);
-                shape_vertices[index++] = x;
-                shape_vertices[index++] = y;
-                shape_vertices[index++] = z;
+                std::vector<GLfloat> ans = parametricSurface(order[k], order[k+1]);
+                shape_vertices[index++] = ans[0];
+                shape_vertices[index++] = ans[1];
+                shape_vertices[index++] = ans[2];
             }   
         }
     }
