@@ -21,29 +21,37 @@ void get_mat(float matrix[]){
 void showOptionsDialog(unsigned  int &program, float &transX, float &transY, float &angle, float &scale, float matrix[]){
         ImGui::Begin("Window1");
         double current_seconds = glfwGetTime();
+        // double prev_time = 0;
         ImGui::Text("Time: (current_seconds) %f", current_seconds);
+        // ImGui::Text("Time: (current_seconds) %f", prev_time);
         int mat_loc = glGetUniformLocation(program, "m_matrix");;
         //trans_mat=glm::make_mat4(matrix);
-        if(ImGui::SliderFloat("Translate  X", &transX, -1.0f, 1.0f)){
-                // mat_loc = glGetUniformLocation(program, "m_matrix");
-                trans_mat = glm::translate(glm::make_mat4(matrix), glm::vec3(transX,transY,0.0f));
-                glUniformMatrix4fv(mat_loc, 1, GL_FALSE, (&trans_mat[0][0]));
-        };
-        if(ImGui::SliderFloat("Translate Y", &transY, -1.0f, 1.0f)){
-                // mat_loc = glGetUniformLocation(program, "m_matrix");
-                trans_mat = glm::translate(glm::make_mat4(matrix), glm::vec3(transX,transY,0.0f));
-                glUniformMatrix4fv(mat_loc, 1, GL_FALSE, (&trans_mat[0][0]));
-        };
-        if(ImGui::SliderFloat("Scaling uniformly", &scale, 0.5f, 2.0f)){
-                //mat_loc = glGetUniformLocation(program, "m_matrix");
-                trans_mat = glm::scale(glm::make_mat4(matrix), glm::vec3(scale));
-                glUniformMatrix4fv(mat_loc, 1, GL_FALSE, (&trans_mat[0][0]));
-        };
-        if(ImGui::SliderFloat("Rotate Y", &angle, 0.0f, 3.14f)){
-                // mat_loc = glGetUniformLocation(program, "m_matrix");
-                trans_mat = glm::rotate(glm::make_mat4(matrix), angle, glm::vec3(0,1,0));
-                glUniformMatrix4fv(mat_loc, 1, GL_FALSE, (&trans_mat[0][0]));
-        };
+        // if(ImGui::SliderFloat("Translate  X", &transX, -1.0f, 1.0f)){
+        //         // mat_loc = glGetUniformLocation(program, "m_matrix");
+        //         trans_mat = glm::translate(glm::make_mat4(matrix), glm::vec3(transX,transY,0.0f));
+        //         glUniformMatrix4fv(mat_loc, 1, GL_FALSE, (&trans_mat[0][0]));
+        // };
+        // if(ImGui::SliderFloat("Translate Y", &transY, -1.0f, 1.0f)){
+        //         // mat_loc = glGetUniformLocation(program, "m_matrix");
+        //         trans_mat = glm::translate(glm::make_mat4(matrix), glm::vec3(transX,transY,0.0f));
+        //         glUniformMatrix4fv(mat_loc, 1, GL_FALSE, (&trans_mat[0][0]));
+        // };
+        // if(ImGui::SliderFloat("Scaling uniformly", &scale, 0.5f, 2.0f)){
+        //         //mat_loc = glGetUniformLocation(program, "m_matrix");
+        //         trans_mat = glm::scale(glm::make_mat4(matrix), glm::vec3(scale));
+        //         glUniformMatrix4fv(mat_loc, 1, GL_FALSE, (&trans_mat[0][0]));
+        // };
+        // if(ImGui::SliderFloat("Rotate Y", &angle, 0.0f, 3.14f)){
+        //         // mat_loc = glGetUniformLocation(program, "m_matrix");
+                
+        //         trans_mat = glm::rotate(glm::make_mat4(matrix), angle, glm::vec3(0,1,0));
+        //         glUniformMatrix4fv(mat_loc, 1, GL_FALSE, (&trans_mat[0][0]));
+        // };
+
+        angle = current_seconds*0.1f;
+        trans_mat = glm::rotate(glm::make_mat4(matrix), angle, glm::vec3(1,1,0));
+        glUniformMatrix4fv(mat_loc, 1, GL_FALSE, (&trans_mat[0][0]));
+        
         ImGui::End();
 }
 
