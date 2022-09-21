@@ -14,12 +14,19 @@ void cleanup(GLFWwindow* window){
 
 
 
-void showOptionsDialog(unsigned  int &program){
+void showOptionsDialog(unsigned  int &program, float &transY){
         ImGui::Begin("Window1");
         double current_seconds = glfwGetTime();
         ImGui::Text("Time: (current_seconds) %f", current_seconds);
-        
+        ImGui::SliderFloat("Translate  Y", &transY, -0.5f, 0.5f);
 
+        // Equation of parabola: (z - 0.5) = y^2 
+        // The center of parabola is at (0, 0, 0.5);
+        float z = pow(transY, 2) + 0.5;
+        glm::mat4 viewT = glm::lookAt(glm::vec3(0.0, transY, z), glm::vec3(0.0, 0.0, 0.0), glm::vec3(0.0, 1.0, 0.0));
+        int view_mat = glGetUniformLocation(program, "vView");;
+        
+        glUniformMatrix4fv(view_mat, 1, GL_FALSE, glm::value_ptr(viewT));
         ImGui::End();
 }
 

@@ -67,6 +67,8 @@ int main(int, char**)
     glEnable( GL_CULL_FACE ); // cull face
     glCullFace( GL_BACK );      // cull back face
     glFrontFace( GL_CW );           // GL_CCW for counter clock-wise
+
+    float transY = 0.0f;
     // Main loop
     while (!glfwWindowShouldClose(window))
     {
@@ -79,7 +81,7 @@ int main(int, char**)
 
         glUseProgram(shaderProgram);
 
-        showOptionsDialog(shaderProgram);
+        showOptionsDialog(shaderProgram, transY);
 
         {
             static float f = 0.0f;

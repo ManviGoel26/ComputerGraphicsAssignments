@@ -54,7 +54,7 @@ unsigned int createProgram(const char *vshader_filename, const char* fshader_fil
 char * getShaderCode(const char*);
 
 void cleanup(GLFWwindow* );
-void showOptionsDialog(unsigned int &program); 
+void showOptionsDialog(unsigned int &program, float &transY); 
 GLFWwindow* setupWindow(int, int);
 
 void setVAO(unsigned int &);
