@@ -75,6 +75,22 @@ int main(int, char**)
           else 
             strcpy(textKeyStatus, "Key status: Down");
         }
+
+		else if (ImGui::IsKeyPressed('P'))
+		{
+			strcpy(textKeyStatus, "Key status: P");
+			int proj_mat = glGetUniformLocation(shaderProgram, "vProjection");
+			projectionT = glm::perspective(45.0f, (GLfloat)screen_width/(GLfloat)screen_height, 0.1f, 1000.0f);
+        	glUniformMatrix4fv(proj_mat, 1, GL_FALSE, glm::value_ptr(projectionT));
+		}
+		else if (ImGui::IsKeyPressed('O'))
+		{
+			strcpy(textKeyStatus, "Key status: O");
+			int proj_mat = glGetUniformLocation(shaderProgram, "vProjection");
+			projectionT = glm::ortho(-45.0f, 45.0f, -45.0f, 45.0f, 0.0f, 100.0f);
+        	glUniformMatrix4fv(proj_mat, 1, GL_FALSE, glm::value_ptr(projectionT));
+		}
+
         else 
           strcpy(textKeyStatus, "Key status:");
 
