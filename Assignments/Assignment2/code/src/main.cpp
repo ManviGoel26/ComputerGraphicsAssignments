@@ -24,6 +24,10 @@ void setupModelTransformationCube(unsigned int &);
 void setupModelTransformationAxis(unsigned int &program, float rot_angle, glm::vec3 rot_axis);
 void setupViewTransformation(unsigned int &);
 void setupProjectionTransformation(unsigned int &);
+void makeProjection(unsigned int &program, char flag);
+void makeViews(unsigned int &program, int flag);
+void moveCamera(unsigned int &program, int direction, char axis, glm::mat4 viewTInverse);
+
 
 int main(int, char**)
 {
@@ -32,6 +36,7 @@ int main(int, char**)
 	ImGuiIO& io = ImGui::GetIO(); // Create IO 
 	ImVec4 clearColor = ImVec4(1.0f, 1.0f, 1.0f, 1.00f);
 	camPosition = glm::vec4(20.0, 40.0, 80.0, 1.0);
+	int viewValue = 0; // Any Position
 
 	unsigned int shaderProgram = createProgram("./shaders/vshader.vs", "./shaders/fshader.fs");
 	//Get handle to color variable in shader
@@ -56,39 +61,86 @@ int main(int, char**)
 	{
 		glfwPollEvents();
 
+		viewT = glm::lookAt(glm::vec3(camPosition), glm::vec3(0.0, 0.0, 0.0), glm::vec3(0.0, 1.0, 0.0));
+		glm::mat4 view_inverse = glm::inverse(viewT);
+
 				// Get key presses
-        if (ImGui::IsKeyDown(ImGui::GetKeyIndex(ImGuiKey_LeftArrow))) {
-          strcpy(textKeyStatus, "Key status: Left");
+        if (ImGui::IsKeyDown(ImGui::GetKeyIndex(ImGuiKey_LeftArrow))) 
+		{
+          	strcpy(textKeyStatus, "Key status: Left");
+			moveCamera(shaderProgram, -1, 'X', view_inverse);	
         }
-        else if (ImGui::IsKeyDown(ImGui::GetKeyIndex(ImGuiKey_RightArrow))) {
-          strcpy(textKeyStatus, "Key status: Right");
+        else if (ImGui::IsKeyDown(ImGui::GetKeyIndex(ImGuiKey_RightArrow))) 
+		{
+          	strcpy(textKeyStatus, "Key status: Right");
+			moveCamera(shaderProgram, 1, 'X', view_inverse);	
         }
-        else if (ImGui::IsKeyDown(ImGui::GetKeyIndex(ImGuiKey_UpArrow))) {
-          if(io.KeyShift)
-            strcpy(textKeyStatus, "Key status: Shift + Up");
-          else 
-            strcpy(textKeyStatus, "Key status: Up");
+        else if (ImGui::IsKeyDown(ImGui::GetKeyIndex(ImGuiKey_UpArrow))) 
+		{
+          	if(io.KeyShift)
+			{
+            	strcpy(textKeyStatus, "Key status: Shift + Up");
+				moveCamera(shaderProgram, 1, 'Z', view_inverse);	
+			}
+          	else 
+			{
+            	strcpy(textKeyStatus, "Key status: Up");
+				moveCamera(shaderProgram, 1, 'Y', view_inverse);	
+			}
         }
         else if (ImGui::IsKeyDown(ImGui::GetKeyIndex(ImGuiKey_DownArrow))) {
-          if(io.KeyShift)
-            strcpy(textKeyStatus, "Key status: Shift + Down");
-          else 
-            strcpy(textKeyStatus, "Key status: Down");
-        }
+          	if(io.KeyShift)
+			{
+            	strcpy(textKeyStatus, "Key status: Shift + Down");
+				moveCamera(shaderProgram, -1, 'Z', view_inverse);	
+			}
+          	else 
+			{
+            	strcpy(textKeyStatus, "Key status: Down");
+				moveCamera(shaderProgram, -1, 'Y', view_inverse);	
+			}        
+		}
 
 		else if (ImGui::IsKeyPressed('P'))
 		{
 			strcpy(textKeyStatus, "Key status: P");
-			int proj_mat = glGetUniformLocation(shaderProgram, "vProjection");
-			projectionT = glm::perspective(45.0f, (GLfloat)screen_width/(GLfloat)screen_height, 0.1f, 1000.0f);
-        	glUniformMatrix4fv(proj_mat, 1, GL_FALSE, glm::value_ptr(projectionT));
+			makeProjection(shaderProgram, 'P');
 		}
 		else if (ImGui::IsKeyPressed('O'))
 		{
 			strcpy(textKeyStatus, "Key status: O");
-			int proj_mat = glGetUniformLocation(shaderProgram, "vProjection");
-			projectionT = glm::ortho(-45.0f, 45.0f, -45.0f, 45.0f, 0.0f, 100.0f);
-        	glUniformMatrix4fv(proj_mat, 1, GL_FALSE, glm::value_ptr(projectionT));
+			makeProjection(shaderProgram, 'O');
+		}
+
+		else if (ImGui::IsKeyPressed('C'))
+		{
+			strcpy(textKeyStatus, "Key status: C");
+			
+			// If view value is 0 -> go to front view. 
+			if (viewValue == 0)
+			{
+				strcpy(textKeyStatus, "Key status: C 1");
+				makeViews(shaderProgram, viewValue);
+				viewValue++;
+			}
+
+			
+			// If view value is 1 -> go to top view
+			else if (viewValue == 1)
+			{
+				strcpy(textKeyStatus, "Key status: C 2");
+				makeViews(shaderProgram, viewValue);
+				viewValue++;
+			}
+
+			
+			// If view value is 2 -> go to side view
+			else if (viewValue == 2)
+			{
+				strcpy(textKeyStatus, "Key status: C 3");
+				makeViews(shaderProgram, viewValue);
+				viewValue = 0;
+			}
 		}
 
         else 
@@ -152,6 +204,56 @@ int main(int, char**)
 	cleanup(window);
 
 	return 0;
+}
+
+void moveCamera(unsigned int &program, int direction, char axis, glm::mat4 viewTInverse)
+{
+	glm::vec4 movement;
+	if (axis == 'X') movement = glm::vec4(direction, 0.0, 0.0, 1.0);
+	else if (axis == 'Y') movement = glm::vec4(0.0, direction, 0.0, 1.0);
+	else movement = glm::vec4(0.0, 0.0, direction, 1.0);
+	camPosition = viewTInverse*movement;
+	viewT = glm::lookAt(glm::vec3(camPosition), glm::vec3(0.0, 0.0, 0.0), glm::vec3(0.0, 1.0, 0.0));
+	int view_mat = glGetUniformLocation(program, "vView");
+	glUniformMatrix4fv(view_mat, 1, GL_FALSE, glm::value_ptr(viewT));
+}
+
+void makeViews(unsigned int &program, int flag)
+{
+	glm::mat4 viewT;	
+	if (flag == 0) 
+	{
+		camPosition = glm::vec4(0.0, 0.0, 80.0, 1.0);
+		// camPosition = glm::vec4(100.0, -100.0, 100.0, 1.0);
+		viewT = glm::lookAt(glm::vec3(camPosition), glm::vec3(0.0, 0.0, 0.0), glm::vec3(0.0, 1.0, 0.0));
+	}
+
+	else if (flag == 1) 
+	{
+		camPosition = glm::vec4(0.0, 100.0, 0.0, 1.0);
+		viewT = glm::lookAt(glm::vec3(camPosition), glm::vec3(0.0, 0.0, 0.0), glm::vec3(1.0, 0.0, 0.0));
+	}
+
+	else if (flag == 2) 
+	{
+		camPosition = glm::vec4(80.0, 0.0, 0.0, 1.0);
+		viewT = glm::lookAt(glm::vec3(camPosition), glm::vec3(0.0, 0.0, 0.0), glm::vec3(0.0, 1.0, 0.0));
+	}
+	
+	int view_mat = glGetUniformLocation(program, "vView");
+	glUniformMatrix4fv(view_mat, 1, GL_FALSE, glm::value_ptr(viewT));
+}
+
+void makeProjection(unsigned int &program, char flag)
+{
+	int proj_mat = glGetUniformLocation(program, "vProjection");
+
+	if (flag == 'O')
+		projectionT = glm::ortho(-45.0f, 45.0f, -45.0f, 45.0f, 0.0f, 100.0f);
+	else
+		projectionT = glm::perspective(45.0f, (GLfloat)screen_width/(GLfloat)screen_height, 0.1f, 1000.0f);
+    
+	glUniformMatrix4fv(proj_mat, 1, GL_FALSE, glm::value_ptr(projectionT));
 }
 
 void createCubeObject(unsigned int &program, unsigned int &cube_VAO)
@@ -267,6 +369,7 @@ void setupViewTransformation(unsigned int &program)
 {
 	//Viewing transformations (World -> Camera coordinates
 	viewT = glm::lookAt(glm::vec3(camPosition), glm::vec3(0.0, 0.0, 0.0), glm::vec3(0.0, 1.0, 0.0));
+	glm::mat4 view_inverse = glm::inverse(viewT);
 
 	//Pass-on the viewing matrix to the vertex shader
 	glUseProgram(program);
