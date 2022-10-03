@@ -146,6 +146,49 @@ int main(int, char**)
      0.5f, -0.5f,  0.5f,
     -0.5f, -0.5f, -0.5f,//12 end*/
 };
+
+    static const GLfloat normals[] = 
+    {
+        0.0f,  0.0f,  1.0f, // triangle 1 : begin
+        0.0f,  0.0f,  1.0f,
+        0.0f,  0.0f,  1.0f, // triangle 1 : end
+        0.0f,  1.0f,  0.0f, // triangle 2 : begin
+        0.0f,  1.0f,  0.0f,
+        0.0f,  1.0f,  0.0f, // triangle 2 : end
+        1.0f,  0.0f,  0.0f,//3 begin
+        1.0f,  0.0f,  0.0f,
+        1.0f,  0.0f,  0.0f,//3 end
+
+        0.0f,  0.0f,  1.0f, // triangle 1 : begin
+        0.0f,  0.0f,  1.0f,
+        0.0f,  0.0f,  1.0f, // triangle 1 : end
+        0.0f,  -1.0f,  0.0f, // triangle 2 : begin
+        0.0f,  -1.0f,  0.0f,
+        0.0f,  -1.0f,  0.0f, // triangle 2 : end
+        -1.0f, 0.0f,  0.0f,//6 begin
+        -1.0f, 0.0f,  0.0f,
+        -1.0f, 0.0f,  0.0f,//6 end
+
+        0.0f,  1.0f, 0.0f,//7 begin
+        0.0f,  1.0f, 0.0f,
+        0.0f,  1.0f, 0.0f,//7 end
+        0.0f,  0.0f,  -1.0f, // triangle 1 : begin
+        0.0f,  0.0f,  -1.0f,
+        0.0f,  0.0f,  -1.0f, // triangle 1 : end
+        -1.0f,  0.0f,  0.0f, // triangle 2 : begin
+        -1.0f,  0.0f,  0.0f,
+        -1.0f,  0.0f,  0.0f, // triangle 2 : end
+        
+        1.0f,  0.0f,  0.0f,//3 begin
+        1.0f,  0.0f,  0.0f,
+        1.0f,  0.0f,  0.0f,//3 end
+        0.0f,  0.0f,  -1.0f, // triangle 1 : begin
+        0.0f,  0.0f,  -1.0f,
+        0.0f,  0.0f,  -1.0f, // triangle 1 : end
+        0.0f,  -1.0f, 0.0f,//7 begin
+        0.0f,  -1.0f, 0.0f,
+        0.0f,  -1.0f, 0.0f,//7 end
+    };
     
     glUseProgram(shaderProgram);
     GLuint sphere_VAO;
@@ -156,8 +199,18 @@ int main(int, char**)
     glGenBuffers(1, &vertex_VBO);
     glBindBuffer(GL_ARRAY_BUFFER, vertex_VBO);
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW); //else tri_points
+    // glBufferData(GL_ARRAY_BUFFER, sizeof(normals), normals, GL_STATIC_DRAW);
     glEnableVertexAttribArray(static_cast<uint>(vVertex_attrib));
     glVertexAttribPointer(static_cast<uint>(vVertex_attrib), 3, GL_FLOAT, GL_FALSE, 0, nullptr);
+
+    GLuint normal_VBO;
+    glGenBuffers(1, &normal_VBO);
+    glBindBuffer(GL_ARRAY_BUFFER, normal_VBO);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(normals), normals, GL_STATIC_DRAW); //else tri_points
+    // glBufferData(GL_ARRAY_BUFFER, sizeof(normals), normals, GL_STATIC_DRAW);
+    glEnableVertexAttribArray(1);
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, nullptr);
+
 
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 
