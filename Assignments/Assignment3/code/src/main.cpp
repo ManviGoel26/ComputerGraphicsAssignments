@@ -24,12 +24,20 @@ double oldX, oldY, currentX, currentY;
 bool isDragging=false;
 
 void createCubeObject(unsigned int &, unsigned int &);
+void createParametricObject(unsigned int &, unsigned int &);
 
 void setupModelTransformation(unsigned int &);
 void setupViewTransformation(unsigned int &);
 void setupProjectionTransformation(unsigned int &);
 glm::vec3 getTrackBallVector(double x, double y);
 
+struct Light 
+{
+    glm::vec3 position;
+    glm::vec3 intensities; //a.k.a. the color of the light
+};
+
+Light gLight;
 int main(int, char**)
 {
     // Setup window
@@ -55,8 +63,10 @@ int main(int, char**)
     setupModelTransformation(shaderProgram);
     setupViewTransformation(shaderProgram);
     setupProjectionTransformation(shaderProgram);
+    // glBindAttribLocation(shaderProgram, 1, "vNormal");
 
-    createCubeObject(shaderProgram, VAO);
+    // createCubeObject(shaderProgram, VAO);
+    createParametricObject(shaderProgram, VAO);
 
     oldX = oldY = currentX = currentY = 0.0;
     int prevLeftButtonState = GLFW_RELEASE;
@@ -68,6 +78,18 @@ int main(int, char**)
         // Get current mouse position
         int leftButtonState = glfwGetMouseButton(window,GLFW_MOUSE_BUTTON_LEFT);
         double x,y;
+        gLight.position = glm::vec3(0.0, 0.0, 1.0);
+        gLight.intensities = glm::vec3(2.0, 1.0, 1.0);
+
+        // GLint originsLoc = glGetUniformLocation(shaderProgram, "light.position");
+        // glUniform3f(originsLoc, origins[i].x, origins[i].y, li.z);
+        
+        GLuint lightPos = glGetUniformLocation(shaderProgram, "light.position");
+        glUniform3f(lightPos, gLight.position.x, gLight.position.y, gLight.position.z);
+        
+        GLuint lightColoe = glGetUniformLocation(shaderProgram, "light.intensities");
+        glUniform3f(lightColoe, gLight.intensities.x, gLight.intensities.y, gLight.intensities.z);
+        
         glfwGetCursorPos(window,&x,&y);
         if(leftButtonState == GLFW_PRESS && prevLeftButtonState == GLFW_RELEASE){
             isDragging = true;
@@ -124,8 +146,10 @@ int main(int, char**)
         glBindVertexArray(VAO); 
         
         glUniform3f(vColor_uniform, 0.5, 0.5, 0.5);
-        glDrawArrays(GL_TRIANGLES, 0, 6*2*3);
-
+        // glDrawArrays(GL_TRIANGLES, 0, 6*2*3);
+        glDrawArrays(GL_TRIANGLES, 0, 30*10*2*3); // 30 Longitudes * 10 Latitude * 2 Traingles * 3 Vertices
+        // glUniform3f(vColor_uniform, 0.0, 0.0, 0.0);
+        
         ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
         glfwSwapBuffers(window);
@@ -184,7 +208,135 @@ void createCubeObject(unsigned int &program, unsigned int &cube_VAO)
 
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindVertexArray(0); //Unbind the VAO to disable changes outside this function.
+    
 }
+
+// start
+// Change the equation for different surfaces. 
+std::vector<GLfloat> parametricSurface(float u, float v)
+{
+    // Constant Radius
+    int R = 5;
+
+    GLfloat x = R*cos(u);
+    GLfloat y = R*sin(u);
+    GLfloat z = v;
+
+    std::vector<GLfloat> ans = {x, y, z};
+    return ans;
+
+    // del f/ del u = (-R*sin(u), R*cos(u), 0)
+    // del f/ del v = (0, 0, 1)
+} 
+
+std::vector<GLfloat> createNormals(float u, float v)
+{
+    // Constant Radius
+    int R = 5;
+
+    glm::vec3 dfbydu = glm::vec3(-R*sin(u), R*cos(u), 0);
+    glm::vec3 dfbydv = glm::vec3(0, 0, 1);
+
+    glm::vec3 cp = normalize(cross(dfbydu, dfbydv));
+    std::vector<GLfloat> ans = {cp.x, cp.y, cp.z};
+    return ans;
+
+    // del f/ del u = (-R*sin(u), R*cos(u), 0)
+    // del f/ del v = (0, 0, 1)
+} 
+// end
+
+
+void createParametricObject(unsigned int &program, unsigned int &shape_VAO)
+{
+    glUseProgram(program);
+
+    //Bind shader variables
+    int vVertex_attrib = glGetAttribLocation(program, "vVertex");
+    if(vVertex_attrib == -1) {
+        fprintf(stderr, "Could not bind location: vVertex\n");
+        exit(0);
+    }
+
+    // int vNormal_attrib = glGetAttribLocation(program, "vNormal");
+    // if(vNormal_attrib == -1) {
+    //     fprintf(stderr, "Could not bind location: vNormal\n");
+    //     exit(0);
+    // }
+
+    //Shape data
+    int res_u = 30, res_v = 10;
+    
+    size_t nVertices = res_u*res_v*2*3; // No. of vertices of the shape
+    GLfloat *shape_vertices = new GLfloat[nVertices*3]; 
+    GLfloat *normals = new GLfloat[nVertices*3]; 
+    //TODO: Generate shape vertices and create trangles from those.
+    //Note: In order to avoid generating an index array for triangles first and then expanding the coordinate array for triangles,
+    // You can directly generate coordinates for successive triangles in two nested for loops to scan over the surface.
+
+// Start
+    // Specify the range of parameters
+    float start_u = 0, start_v = 0, end_u = glm::pi<float>()*2, end_v = 10;
+
+    // Calculate the step size to make uniform size of rectangles
+    float step_u = (end_u - start_u)/res_u, step_v = (end_v - start_v)/res_v;
+    
+    int index = 0;
+    
+    // 2 Loops for 2 parameters.
+    for (int j = 0; j < res_v; j++)
+    {
+        for (int i = 0; i < res_u; i++)
+        {
+            // Calculate the current and next value for both parameters. 
+            float u = i*step_u + start_u;
+            float v = j*step_v + start_v;
+            float u_next = (i+1 == res_u) ? end_u : (i+1)*step_u + start_u;
+            float v_next = (j+1 == res_v) ? end_v : (j+1)*step_v + start_v;
+
+            // Order of Triangles
+            std::vector<float> order = {u, v, u_next, v, u, v_next, u_next, v_next, u, v_next, u_next, v};
+
+            // Calculate the coordinates of each triangles and add it to the array in correct order.
+            for (int k = 0; k < order.size()-1; k += 2)
+            {
+                std::vector<GLfloat> ans = parametricSurface(order[k], order[k+1]);
+                std::vector<GLfloat> ns = createNormals(order[k], order[k+1]);
+
+                shape_vertices[index] = ans[0]; normals[index] = ns[0]; index++;
+                shape_vertices[index] = ans[1]; normals[index] = ns[1]; index++;
+                shape_vertices[index] = ans[2]; normals[index] = ns[2]; index++;
+                
+            }   
+        }
+    }
+    
+    //Generate VAO object
+    glGenVertexArrays(1, &shape_VAO);
+    glBindVertexArray(shape_VAO);
+
+    //Create VBOs for the VAO
+    GLuint vertex_VBO;
+    glGenBuffers(1, &vertex_VBO);
+    glBindBuffer(GL_ARRAY_BUFFER, vertex_VBO);
+    glBufferData(GL_ARRAY_BUFFER, nVertices*3*sizeof(GLfloat), shape_vertices, GL_STATIC_DRAW);
+    glEnableVertexAttribArray(vVertex_attrib);
+    glVertexAttribPointer(vVertex_attrib, 3, GL_FLOAT, GL_FALSE, 0, 0);
+    delete []shape_vertices;
+
+    GLuint normal_VBO;
+    glGenBuffers(1, &normal_VBO);
+    glBindBuffer(GL_ARRAY_BUFFER, normal_VBO);
+    glBufferData(GL_ARRAY_BUFFER, nVertices*3*sizeof(GLfloat), normals, GL_STATIC_DRAW);
+    glEnableVertexAttribArray(1);
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, 0);
+    delete []normals;
+
+
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+    glBindVertexArray(0); //Unbind the VAO to disable changes outside this function.
+}
+    // End
 
 void setupModelTransformation(unsigned int &program)
 {
