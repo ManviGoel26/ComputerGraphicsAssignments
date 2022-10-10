@@ -46,7 +46,10 @@ int main(int, char**)
 
     ImVec4 clearColor = ImVec4(1.0f, 1.0f, 1.0f, 1.00f);
 
-    unsigned int shaderProgram = createProgram("./shaders/vshader.vs", "./shaders/fshader.fs");
+    // unsigned int shaderProgram = createProgram("./shaders/vshader_g.vs", "./shaders/fshader_g.fs");
+    // unsigned int shaderProgram = createProgram("./shaders/vshader_p.vs", "./shaders/fshader_p.fs");
+    unsigned int shaderProgram = createProgram("./shaders/vshader_b.vs", "./shaders/fshader_b.fs");
+
 
     //Get handle to color variable in shader
     vColor_uniform = glGetUniformLocation(shaderProgram, "vColor");
@@ -71,6 +74,9 @@ int main(int, char**)
     oldX = oldY = currentX = currentY = 0.0;
     int prevLeftButtonState = GLFW_RELEASE;
 
+    gLight.position = glm::vec3(-32.0, 0.0, 0.0);
+    gLight.intensities = glm::vec3(1.0, 1.0, 0.5);
+
     while (!glfwWindowShouldClose(window))
     {
         glfwPollEvents();
@@ -78,17 +84,15 @@ int main(int, char**)
         // Get current mouse position
         int leftButtonState = glfwGetMouseButton(window,GLFW_MOUSE_BUTTON_LEFT);
         double x,y;
-        gLight.position = glm::vec3(0.0, 0.0, 1.0);
-        gLight.intensities = glm::vec3(2.0, 1.0, 1.0);
-
+        
         // GLint originsLoc = glGetUniformLocation(shaderProgram, "light.position");
         // glUniform3f(originsLoc, origins[i].x, origins[i].y, li.z);
-        
         GLuint lightPos = glGetUniformLocation(shaderProgram, "light.position");
         glUniform3f(lightPos, gLight.position.x, gLight.position.y, gLight.position.z);
         
-        GLuint lightColoe = glGetUniformLocation(shaderProgram, "light.intensities");
-        glUniform3f(lightColoe, gLight.intensities.x, gLight.intensities.y, gLight.intensities.z);
+        GLuint lightColor = glGetUniformLocation(shaderProgram, "light.intensities");
+        glUniform3f(lightColor, gLight.intensities.x, gLight.intensities.y, gLight.intensities.z);
+    
         
         glfwGetCursorPos(window,&x,&y);
         if(leftButtonState == GLFW_PRESS && prevLeftButtonState == GLFW_RELEASE){
@@ -105,11 +109,20 @@ int main(int, char**)
         }
 
         // Rotate based on mouse drag movement
+
         prevLeftButtonState = leftButtonState;
         if(isDragging && (currentX !=oldX || currentY != oldY))
         {
             glm::vec3 va = getTrackBallVector(oldX, oldY);
             glm::vec3 vb = getTrackBallVector(currentX, currentY);
+
+            GLuint lightPos = glGetUniformLocation(shaderProgram, "light.position");
+            std::cout << lightPos << "\n";
+            glUniform3f(lightPos, gLight.position.x, gLight.position.y, gLight.position.z);
+            
+            GLuint lightColoe = glGetUniformLocation(shaderProgram, "light.intensities");
+            glUniform3f(lightColoe, gLight.intensities.x, gLight.intensities.y, gLight.intensities.z);
+        
 
             float angle = acos(std::min(1.0f, glm::dot(va,vb)));
             glm::vec3 axis_in_camera_coord = glm::cross(va, vb);
@@ -117,6 +130,7 @@ int main(int, char**)
             glm::vec3 axis_in_object_coord = camera2object * axis_in_camera_coord;
             modelT = glm::rotate(modelT, angle, axis_in_object_coord);
             glUniformMatrix4fv(vModel_uniform, 1, GL_FALSE, glm::value_ptr(modelT));
+            
 
             oldX = currentX;
             oldY = currentY;
@@ -147,7 +161,7 @@ int main(int, char**)
         
         glUniform3f(vColor_uniform, 0.5, 0.5, 0.5);
         // glDrawArrays(GL_TRIANGLES, 0, 6*2*3);
-        glDrawArrays(GL_TRIANGLES, 0, 30*10*2*3); // 30 Longitudes * 10 Latitude * 2 Traingles * 3 Vertices
+        glDrawArrays(GL_TRIANGLES, 0, 10*5*2*3); // 30 Longitudes * 10 Latitude * 2 Traingles * 3 Vertices
         // glUniform3f(vColor_uniform, 0.0, 0.0, 0.0);
         
         ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
@@ -265,7 +279,7 @@ void createParametricObject(unsigned int &program, unsigned int &shape_VAO)
     // }
 
     //Shape data
-    int res_u = 30, res_v = 10;
+    int res_u = 10, res_v = 5;
     
     size_t nVertices = res_u*res_v*2*3; // No. of vertices of the shape
     GLfloat *shape_vertices = new GLfloat[nVertices*3]; 
@@ -328,8 +342,8 @@ void createParametricObject(unsigned int &program, unsigned int &shape_VAO)
     glGenBuffers(1, &normal_VBO);
     glBindBuffer(GL_ARRAY_BUFFER, normal_VBO);
     glBufferData(GL_ARRAY_BUFFER, nVertices*3*sizeof(GLfloat), normals, GL_STATIC_DRAW);
-    glEnableVertexAttribArray(1);
-    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, 0);
+    glEnableVertexAttribArray(5);
+    glVertexAttribPointer(5, 3, GL_FLOAT, GL_FALSE, 0, 0);
     delete []normals;
 
 
