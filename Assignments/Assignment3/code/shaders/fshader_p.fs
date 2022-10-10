@@ -39,5 +39,5 @@ void main(void)
     float spec = pow(max(dot(viewDir, reflectDir), 0.0), spec_exp);
     vec3 specular = ks*spec*light.intensities*fColor;
 
-    outColor = vec4(specular, 1.0);
+    outColor = vec4(ambient + diffuse + specular, 1.0);
 }
