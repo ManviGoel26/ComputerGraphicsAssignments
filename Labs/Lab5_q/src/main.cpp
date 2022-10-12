@@ -71,7 +71,7 @@ GLuint sphere_VAO, indices_IBO;
     float *uv = new float[nTheta*nPhi*2];
     // float *v = new float[nTheta*nPhi];
     float theta, phi, x, y, z, x2, y2, z2;
-    float radius = 100.5f;
+    float radius = 0.5f;
     for (int j = 0; j<nTheta; j++)
         for(int i=0; i<nPhi; i++)
         {
@@ -330,8 +330,10 @@ bool raySphereIntersection(glm::vec3 e, glm::vec3 d, glm::vec3 c, float r){
     float t = calculate_t(e, d, c, r);
     // std::cout << t << "\n";
     if (t == -1)
+    {
+        std::cout << "No Intersection\n";
         return -1;
-
+    }
     glm::vec3 pointOfIntersection = e + t*d;
     std::cout << "POI (" << pointOfIntersection.x << " ," << pointOfIntersection.y << " ," << pointOfIntersection.z << ")\n";
     return 1;
