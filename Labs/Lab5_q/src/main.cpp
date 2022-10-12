@@ -13,7 +13,7 @@ double oldX, oldY, currentX, currentY;
 bool isDragging=false;
 int size;
 glm::vec3 getTrackBallVector(double x, double y);
-bool raySphereIntersection(glm::vec3 p, glm::vec3 d, glm::vec3 c);
+bool raySphereIntersection(glm::vec3 e, glm::vec3 d, glm::vec3 c, float r);
 int random(int min, int max) //range : [min, max]
 {
    static bool first = true;
@@ -71,7 +71,7 @@ GLuint sphere_VAO, indices_IBO;
     float *uv = new float[nTheta*nPhi*2];
     // float *v = new float[nTheta*nPhi];
     float theta, phi, x, y, z, x2, y2, z2;
-    float radius = 0.5f;
+    float radius = 100.5f;
     for (int j = 0; j<nTheta; j++)
         for(int i=0; i<nPhi; i++)
         {
@@ -108,6 +108,8 @@ GLuint sphere_VAO, indices_IBO;
     glm::vec3 point1 = glm::vec3(ptsx[origin_index], ptsy[origin_index], ptsz[origin_index]);
     glm::vec3 point2 = glm::vec3(ptsx[direction_index], ptsy[direction_index], ptsz[direction_index]);
     glm::vec3 direction  = point2 - point1;
+
+    // Call raySphereFunction
 
     //Generate index array
     GLushort *indices = new GLushort[2*(nTheta-1)*(nPhi-1)*3];
@@ -224,7 +226,11 @@ GLuint sphere_VAO, indices_IBO;
 
             glm::vec3 point1 = glm::vec3(ptsx[origin_index], ptsy[origin_index], ptsz[origin_index]);
             glm::vec3 point2 = glm::vec3(ptsx[direction_index], ptsy[direction_index], ptsz[direction_index]);
-            // glm::vec3 direction  = point2 - point1;  
+            glm::vec3 direction  = point2 - point1;  
+            glm::vec3 sphereCenter = glm::vec3(0, 0, 0);
+
+            bool flag = raySphereIntersection(point1, direction, sphereCenter, radius);
+            // cout << flag << "\n";
 
              float vertices_line[] = {
                 point1.x , point1.y, point1.z,
@@ -302,18 +308,33 @@ glm::vec3 getTrackBallVector(double x, double y)
     return p;
 }
 
-// float calculate_t(glm::vec3 p, glm::vec3 d, glm::vec3 c){
+float calculate_t(glm::vec3 e, glm::vec3 d, glm::vec3 c, float r)
+{
+    // p = e + 
+    float Rsquare = pow(r, 2);
+    float discriminant = pow(glm::dot(d, (e-c)), 2) - (glm::dot(d, d)*(glm::dot(e-c, e-c) - Rsquare));
+    if (discriminant < 0) return -1;
+    
 
+    float t1 = (glm::dot(-d, e-c) + pow(discriminant, 0.5))/glm::dot(d,d);
+    float t2 = (glm::dot(-d, e-c) - pow(discriminant, 0.5))/glm::dot(d,d);
 
-//     return t;
+    if (t1 >= 0 && t2 >= 0) return std::min(t1, t2);
+    else if (t1 < 0 && t2 >= 0) return t2;
+    else if (t1 >= 0 && t2 < 0) return t1;
+    return -1;
 
-// }
-// bool raySphereIntersection(glm::vec3 p, glm::vec3 d, glm::vec3 c){
+}
+bool raySphereIntersection(glm::vec3 e, glm::vec3 d, glm::vec3 c, float r){
 
-//     t = calculate_t(p, d, c);
-//     check conditions
+    float t = calculate_t(e, d, c, r);
+    // std::cout << t << "\n";
+    if (t == -1)
+        return -1;
 
-//     return Flag;
-// }
+    glm::vec3 pointOfIntersection = e + t*d;
+    std::cout << "POI (" << pointOfIntersection.x << " ," << pointOfIntersection.y << " ," << pointOfIntersection.z << ")\n";
+    return 1;
+}
 
 
