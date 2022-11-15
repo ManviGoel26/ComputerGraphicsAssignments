@@ -63,11 +63,11 @@ int main(int, char**)
     m2->ks = 0.1;
     m2->n = 32;
     
-    Object *triangle2 = new Triangle(Vector3D(-2, 0, -10), Vector3D(3, 0, -6), Vector3D(0, 3, -20), m2);
+    Object *triangle2 = new Triangle(Vector3D(1, 4, -12), Vector3D(1, 7, -24), Vector3D(-8, 8, -21), m2);
     world->addObject(triangle2);
 
 
-    LightSource *light = new PointLightSource(world, Vector3D(0, 1, 0), Color(1, 1, 1));
+    LightSource *light = new PointLightSource(world, Vector3D(0, 10, 0), Color(1, 1, 1));
     world->addLight(light);
 
     engine = new RenderEngine(world, camera);
