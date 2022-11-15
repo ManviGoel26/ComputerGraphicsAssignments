@@ -9,6 +9,7 @@
 #include "sphere.h"
 #include "lightsource.h"
 #include "pointlightsource.h"
+#include "triangle.h"
 
 #define STB_IMAGE_IMPLEMENTATION
 #define STB_IMAGE_WRITE_IMPLEMENTATION
@@ -43,13 +44,28 @@ int main(int, char**)
     world->setAmbient(Color(1));
     world->setBackground(Color(0.1, 0.3, 0.6));
     
-    Material *m = new Material(world);
-    m->color = Color(0.1, 0.7, 0.0);
-    m->ka = 0.1;
-    m->kd = 0.9;
+    Material *m1 = new Material(world);
+    m1->color = Color(0.1, 0.7, 0.5);
+    m1->ka = 0.1;
+    m1->kd = 0.9;
+    m1->ks = 0.8;
+    m1->n = 1;
     
-    Object *sphere = new Sphere(Vector3D(2, 0, -10), 3, m);
-    world->addObject(sphere);
+    // Object *sphere = new Sphere(Vector3D(2, 0, -10), 3, m1);
+    // world->addObject(sphere);
+    Object *triangle1 = new Triangle(Vector3D(1, 1, -12), Vector3D(1, 5, -24), Vector3D(-8, 5, -21), m1);
+    world->addObject(triangle1);
+
+    Material *m2 = new Material(world);
+    m2->color = Color(0.7, 0.4, 0.9);
+    m2->ka = 0.4;
+    m2->kd = 0.5;
+    m2->ks = 0.1;
+    m2->n = 32;
+    
+    Object *triangle2 = new Triangle(Vector3D(-2, 0, -10), Vector3D(3, 0, -6), Vector3D(0, 3, -20), m2);
+    world->addObject(triangle2);
+
 
     LightSource *light = new PointLightSource(world, Vector3D(0, 1, 0), Color(1, 1, 1));
     world->addLight(light);

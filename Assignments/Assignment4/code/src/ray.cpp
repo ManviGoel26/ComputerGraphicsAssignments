@@ -1,4 +1,5 @@
 #include "ray.h"
+#include "iostream"
 
 bool Ray::setParameter(const float par, const Object *obj)
 {

@@ -1,0 +1,3 @@
+/home/manvi19472/Documents/ComputerGraphicsAssignments/Assignments/Assignment4/code/src/CMakeFiles/Assignment04.dir
+/home/manvi19472/Documents/ComputerGraphicsAssignments/Assignments/Assignment4/code/src/CMakeFiles/edit_cache.dir
+/home/manvi19472/Documents/ComputerGraphicsAssignments/Assignments/Assignment4/code/src/CMakeFiles/rebuild_cache.dir

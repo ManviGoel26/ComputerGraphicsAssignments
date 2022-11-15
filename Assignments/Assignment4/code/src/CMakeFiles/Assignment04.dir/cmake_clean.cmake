@@ -1,0 +1,43 @@
+file(REMOVE_RECURSE
+  "../Assignment04"
+  "../Assignment04.pdb"
+  "CMakeFiles/Assignment04.dir/camera.cpp.o"
+  "CMakeFiles/Assignment04.dir/camera.cpp.o.d"
+  "CMakeFiles/Assignment04.dir/color.cpp.o"
+  "CMakeFiles/Assignment04.dir/color.cpp.o.d"
+  "CMakeFiles/Assignment04.dir/depends/imgui/imgui.cpp.o"
+  "CMakeFiles/Assignment04.dir/depends/imgui/imgui.cpp.o.d"
+  "CMakeFiles/Assignment04.dir/depends/imgui/imgui_demo.cpp.o"
+  "CMakeFiles/Assignment04.dir/depends/imgui/imgui_demo.cpp.o.d"
+  "CMakeFiles/Assignment04.dir/depends/imgui/imgui_draw.cpp.o"
+  "CMakeFiles/Assignment04.dir/depends/imgui/imgui_draw.cpp.o.d"
+  "CMakeFiles/Assignment04.dir/depends/imgui/imgui_impl_glfw.cpp.o"
+  "CMakeFiles/Assignment04.dir/depends/imgui/imgui_impl_glfw.cpp.o.d"
+  "CMakeFiles/Assignment04.dir/depends/imgui/imgui_impl_opengl3.cpp.o"
+  "CMakeFiles/Assignment04.dir/depends/imgui/imgui_impl_opengl3.cpp.o.d"
+  "CMakeFiles/Assignment04.dir/depends/imgui/imgui_widgets.cpp.o"
+  "CMakeFiles/Assignment04.dir/depends/imgui/imgui_widgets.cpp.o.d"
+  "CMakeFiles/Assignment04.dir/imgui_setup.cpp.o"
+  "CMakeFiles/Assignment04.dir/imgui_setup.cpp.o.d"
+  "CMakeFiles/Assignment04.dir/main.cpp.o"
+  "CMakeFiles/Assignment04.dir/main.cpp.o.d"
+  "CMakeFiles/Assignment04.dir/material.cpp.o"
+  "CMakeFiles/Assignment04.dir/material.cpp.o.d"
+  "CMakeFiles/Assignment04.dir/ray.cpp.o"
+  "CMakeFiles/Assignment04.dir/ray.cpp.o.d"
+  "CMakeFiles/Assignment04.dir/renderengine.cpp.o"
+  "CMakeFiles/Assignment04.dir/renderengine.cpp.o.d"
+  "CMakeFiles/Assignment04.dir/triangle.cpp.o"
+  "CMakeFiles/Assignment04.dir/triangle.cpp.o.d"
+  "CMakeFiles/Assignment04.dir/utility.cpp.o"
+  "CMakeFiles/Assignment04.dir/utility.cpp.o.d"
+  "CMakeFiles/Assignment04.dir/vector3D.cpp.o"
+  "CMakeFiles/Assignment04.dir/vector3D.cpp.o.d"
+  "CMakeFiles/Assignment04.dir/world.cpp.o"
+  "CMakeFiles/Assignment04.dir/world.cpp.o.d"
+)
+
+# Per-language clean rules from dependency scanning.
+foreach(lang CXX)
+  include(CMakeFiles/Assignment04.dir/cmake_clean_${lang}.cmake OPTIONAL)
+endforeach()

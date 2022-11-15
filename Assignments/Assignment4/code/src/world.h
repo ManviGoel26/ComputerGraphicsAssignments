@@ -28,6 +28,12 @@ public:
 	{
 		lightSourceList.push_back(ls);
 	}
+	
+	std::vector<LightSource*> getLightSource()
+	{
+		return lightSourceList;
+	}
+
 	void addObject(Object *obj)
 	{
 		objectList.push_back(obj);
