@@ -4,7 +4,7 @@ const Color RenderEngine::trace(const int i, const int j)
 {
 	Vector3D ray_dir = camera->get_ray_direction(i, j);
 	Ray ray(camera->get_position(), ray_dir);
-	return world->shade_ray(ray);
+	return world->shade_ray(ray, 0);
 }
 
 bool RenderEngine::renderLoop()

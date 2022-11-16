@@ -28,7 +28,7 @@ public:
 		world(w), color(0),
 		ka(0), kd(0.0), ks(0), kr(0), kt(0),n(0), eta(0) {}
 	// Color shade(const Ray& incident, const bool isSolid) const;
-	Color shade(const Ray& incident, const bool isSolid, Vector3D normal, Vector3D lightDir, Color lightInt, Vector3D point, bool shaded) const;
+	Color shade(const Ray& incident, const bool isSolid, Vector3D normal, int depth) const;
 
 
 };

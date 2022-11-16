@@ -20,9 +20,9 @@ protected:
 public:
 	Object(Material *mat): material(mat) {}	
 	virtual bool intersect(Ray& ray) const = 0;
-	virtual Color shade(const Ray& ray, Vector3D lightDir, Color lightInt, Vector3D point, bool shaded) const
+	virtual Color shade(const Ray& ray, int depth) const
 	{
-		return material->shade(ray, isSolid, normal, lightDir, lightInt, point, shaded);
+		return material->shade(ray, isSolid, normal, depth);
 	}
 	Vector3D getNormal() const
 	{
