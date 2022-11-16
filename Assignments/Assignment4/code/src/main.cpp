@@ -64,29 +64,29 @@ int main(int, char**)
     m2->ks = 0.1;
     m2->n = 32;
     m2->kr = 0.1;
+    m2->kt = 0.5;
+    m2->eta = 1.5;
     
     Object *triangle2 = new Triangle(Vector3D(6, 6, -14), Vector3D(6, 0, -14), Vector3D(0, 6, -14), m2);
     world->addObject(triangle2);
 
     Material *m3 = new Material(world);
-    m3->color = Color(0.7, 0.4, 0.9);
-    m3->ka = 0.1;
-    m3->kd = 0.0;
+    m3->color = Color(0.0, 0.0, 0.0);
+    m3->ka = 0.9;
+    m3->kd = 0.1;
     m3->ks = 0.1;
-    m3->n = 3;
-    m3->kr = 0;
-    m3->kt = 1;
-    m3->eta = 1.52;
+    m3->n = 32;
+    m3->kr = 1;
     
-    Object *triangle3 = new Triangle(Vector3D(5, 5, -6), Vector3D(5, 0, -6), Vector3D(0, 5, -6), m3);
+    Object *triangle3 = new Triangle(Vector3D(-25, 25, -25), Vector3D(-25, -25, -25), Vector3D(25, 25, -25), m3);
     world->addObject(triangle3);
 
 
-    LightSource *light1 = new PointLightSource(world, Vector3D(-1, 0, 1), Color(1, 1, 1));
+    LightSource *light1 = new PointLightSource(world, Vector3D(0, 0, -6), Color(1, 1, 1));
     world->addLight(light1);
 
-    // LightSource *light2 = new PointLightSource(world, Vector3D(10, 10, 0), Color(1, 2, 10));
-    // world->addLight(light2);
+    LightSource *light2 = new PointLightSource(world, Vector3D(10, 10, 0), Color(1, 2, 10));
+    world->addLight(light2);
 
     engine = new RenderEngine(world, camera);
 

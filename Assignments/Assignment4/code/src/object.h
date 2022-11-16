@@ -7,6 +7,7 @@
 #include "color.h"
 #include "material.h"
 #include "world.h"
+#include "string.h"
 // #include "lightsource.h"
 // #include "pointlightsource.h"
 
