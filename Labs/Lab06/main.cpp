@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <iostream>
 #define STB_IMAGE_IMPLEMENTATION 
+#define GLM_ENABLE_EXPERIMENTAL
 #include <stb_image.h>
 
 #include <GL/glew.h>
@@ -85,8 +86,8 @@ int main(int, char**)
 
     const char *vertexShaderSource = "#version 330 core\n"              //Vertex Shader
     "layout (location = 0) in vec4 aPos;\n"
-    // "layout (location = 1) in vec2 aTexCoord;\n"
-    // "out vec2 TexCoord;\n"
+    "layout (location = 1) in vec2 aTexCoord;\n"
+    "out vec2 TexCoord;\n"
     "uniform mat4 model;\n"
     "uniform mat4 view;\n"
     "uniform mat4 proj;\n"
@@ -95,18 +96,18 @@ int main(int, char**)
     "void main()\n"
     "{\n"
     "   gl_Position = proj * view * model * vec4(aPos.x, aPos.y, aPos.z, 1.0);\n"
-    // "   TexCoord = vec2(aTexCoord);"
+    "   TexCoord = vec2(aTexCoord);"
     "}\0";
 
 
     const char *fragmentShaderSource = "#version 330 core\n"            //Fragment Shader
     " out vec4 FragColor;\n"
-    // " in vec2 TexCoord;"
-    // "uniform sampler2D texture1;\n"
+    " in vec2 TexCoord;"
+    "uniform sampler2D texture1;\n"
     "void main()\n"
     "{\n"
     "   FragColor = vec4(1.0f, 0.5f, 0.2f, 1.0);\n"
-    // "   FragColor = texture(texture1, TexCoord);\n"
+    "   FragColor = texture(texture1, TexCoord);\n"
     "}\0";
 
 
@@ -158,10 +159,68 @@ int main(int, char**)
 
 
 	float vertices[] = {
-            //Coordinate          
+            //Coordinate   
+                //    1st face
         -0.5f, -0.5f, 0.0f,    0.0f, 0.0f,// lower-left corner
          0.5f, -0.5f, 0.0f,    1.0f, 0.0f,// lower-right corner
-         0.0f,  0.5f, 0.0f,    0.5f, 1.0f // top-center corner
+         0.5f,  0.5f, 0.0f,    1.0f, 1.0f, // top-center corner
+
+
+        -0.5f, -0.5f, 0.0f,    0.0f, 0.0f,// lower-left corner 
+         0.5f,  0.5f, 0.0f,    1.0f, 1.0f, // top-center corner
+         -0.5f,  0.5f, 0.0f,    0.0f, 1.0f, // top-center corner
+
+        // 2nd face
+        -0.5f, 0.5f, 0.0f,    0.0f, 0.0f,// lower-left corner
+         0.5f, 0.5f, 0.0f,    1.0f, 0.0f,// lower-right corner
+         0.5f,  0.5f, -1.0f,    1.0f, 1.0f, // top-center corner
+
+
+        -0.5f, 0.5f, 0.0f,    0.0f, 0.0f,// lower-left corner 
+         0.5f,  0.5f, -1.0f,    1.0f, 1.0f, // top-center corner
+         -0.5f,  0.5f, -1.0f,    0.0f, 1.0f, // top-center corner
+
+        //  3rd face
+        0.5f, -0.5f, 0.0f,    0.0f, 0.0f,// lower-left corner
+        0.5f, -0.5f, -1.0f,    1.0f, 0.0f,// lower-right corner
+        0.5f,  0.5f, -1.0f,    1.0f, 1.0f, // top-center corner
+
+
+        0.5f, -0.5f, 0.0f,    0.0f, 0.0f,// lower-left corner 
+        0.5f,  0.5f, -1.0f,    1.0f, 1.0f, // top-center corner
+        0.5f,  0.5f, 0.0f,    0.0f, 1.0f, // top-center corner
+
+        
+        //  4th face
+        -0.5f, -0.5f, -1.0f,    0.0f, 0.0f,// lower-left corner
+        -0.5f, -0.5f, 0.0f,    1.0f, 0.0f,// lower-right corner
+        -0.5f,  0.5f, 0.0f,    1.0f, 1.0f, // top-center corner
+
+
+        -0.5f, -0.5f, -1.0f,    0.0f, 0.0f,// lower-left corner 
+        -0.5f,  0.5f, 0.0f,    1.0f, 1.0f, // top-center corner
+        -0.5f,  0.5f, -1.0f,    0.0f, 1.0f, // top-center corner
+
+        // 5th face
+        -0.5f, -0.5f, -1.0f,    0.0f, 0.0f,// lower-left corner
+        0.5f, -0.5f, -1.0f,    1.0f, 0.0f,// lower-right corner
+        0.5f,  -0.5f, 0.0f,    1.0f, 1.0f, // top-center corner
+
+
+        -0.5f, -0.5f, -1.0f,    0.0f, 0.0f,// lower-left corner 
+        0.5f,  -0.5f, 0.0f,    1.0f, 1.0f, // top-center corner
+        -0.5f,  -0.5f, 0.0f,    0.0f, 1.0f, // top-center corner
+
+        
+        // 6th face
+        0.5f, -0.5f, -1.0f,    0.0f, 0.0f,// lower-left corner
+        -0.5f, -0.5f, -1.0f,    1.0f, 0.0f,// lower-right corner
+        -0.5f,  0.5f, -1.0f,    1.0f, 1.0f, // top-center corner
+
+
+        0.5f, -0.5f, -1.0f,    0.0f, 0.0f,// lower-left corner 
+        -0.5f,  0.5f, -1.0f,    1.0f, 1.0f, // top-center corner
+        0.5f,  0.5f, -1.0f,    0.0f, 1.0f, // top-center corner
     };
 
 
@@ -180,35 +239,35 @@ int main(int, char**)
     glEnableVertexAttribArray(0);
 
     // note that this is allowed, the call to glVertexAttribPointer registered VBO as the vertex attribute's bound vertex buffer object so afterwards we can safely unbind
-    // glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
-    // glEnableVertexAttribArray(1);
+    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
+    glEnableVertexAttribArray(1);
 
     // glBindVertexArray(0); 
 
     stbi_set_flip_vertically_on_load(true);
 
-	// unsigned int texture;
-	// glGenTextures(1, &texture);
- //    glActiveTexture(GL_TEXTURE0);
-	// glBindTexture(GL_TEXTURE_2D, texture);
-	// // set the texture wrapping/filtering options (on the currently bound texture object)
-	// glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);	
-	// glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-	// glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-	// glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	// // load and generate the texture
- //    // int width, height, nrChannels;
-	// unsigned char *data = stbi_load("wall.jpg", &width, &height, &nrChannels, 0);
-	// if (data)
-	// {
-	//     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
-	//     glGenerateMipmap(GL_TEXTURE_2D);
-	// }
-	// else
-	// {
-	//     std::cout << "Failed to load texture" << std::endl;
-	// }
-	// stbi_image_free(data);
+	unsigned int texture;
+	glGenTextures(1, &texture);
+    glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, texture);
+	// set the texture wrapping/filtering options (on the currently bound texture object)
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);	
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	// load and generate the texture
+    // int width, height, nrChannels;
+	unsigned char *data = stbi_load("wall.jpg", &width, &height, &nrChannels, 0);
+	if (data)
+	{
+	    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+	    glGenerateMipmap(GL_TEXTURE_2D);
+	}
+	else
+	{
+	    std::cout << "Failed to load texture" << std::endl;
+	}
+	stbi_image_free(data);
 
     float rotation=0.0f;
     double prevTime=glfwGetTime();
@@ -232,7 +291,7 @@ int main(int, char**)
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         // bind Texture
-        // glBindTexture(GL_TEXTURE_2D, texture);
+        glBindTexture(GL_TEXTURE_2D, texture);
 
         ImGui::Render();
 
@@ -242,16 +301,16 @@ int main(int, char**)
 
         double curTime=glfwGetTime();
         if(curTime-prevTime>=1/60){
-            rotation+=2.0f;
+            rotation+=0.3f;
             prevTime=curTime;
         }
 
         glm::mat4 model = glm::mat4(1.0f);
 
         //for Triangle
-        model=glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f));
+        // model=glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f));
         //for Cube
-        // model=glm::rotate(model, glm::radians(rotation), glm::vec3(1.0f, 1.0f, 1.0f));
+        model=glm::rotate(model, glm::radians(rotation), glm::vec3(1.0f, 1.0f, 1.0f));
 
         proj=glm::perspective(glm::radians(45.0f), (float)(1000/1000), 0.1f, 100.0f);
         
