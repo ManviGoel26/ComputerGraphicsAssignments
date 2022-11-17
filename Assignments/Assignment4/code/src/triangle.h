@@ -19,7 +19,6 @@ public:
 		Object(mat), a(_a), b(_b), c(_c)
 	{
 		isSolid = true;
-		normal = crossProduct(b - a, c - a);
 	}
 	
 	virtual bool intersect(Ray& r) const;

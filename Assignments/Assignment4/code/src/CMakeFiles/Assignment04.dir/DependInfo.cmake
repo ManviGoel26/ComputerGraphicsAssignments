@@ -21,6 +21,7 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/manvi19472/Documents/ComputerGraphicsAssignments/Assignments/Assignment4/code/src/material.cpp" "CMakeFiles/Assignment04.dir/material.cpp.o" "gcc" "CMakeFiles/Assignment04.dir/material.cpp.o.d"
   "/home/manvi19472/Documents/ComputerGraphicsAssignments/Assignments/Assignment4/code/src/ray.cpp" "CMakeFiles/Assignment04.dir/ray.cpp.o" "gcc" "CMakeFiles/Assignment04.dir/ray.cpp.o.d"
   "/home/manvi19472/Documents/ComputerGraphicsAssignments/Assignments/Assignment4/code/src/renderengine.cpp" "CMakeFiles/Assignment04.dir/renderengine.cpp.o" "gcc" "CMakeFiles/Assignment04.dir/renderengine.cpp.o.d"
+  "/home/manvi19472/Documents/ComputerGraphicsAssignments/Assignments/Assignment4/code/src/sphere.cpp" "CMakeFiles/Assignment04.dir/sphere.cpp.o" "gcc" "CMakeFiles/Assignment04.dir/sphere.cpp.o.d"
   "/home/manvi19472/Documents/ComputerGraphicsAssignments/Assignments/Assignment4/code/src/triangle.cpp" "CMakeFiles/Assignment04.dir/triangle.cpp.o" "gcc" "CMakeFiles/Assignment04.dir/triangle.cpp.o.d"
   "/home/manvi19472/Documents/ComputerGraphicsAssignments/Assignments/Assignment4/code/src/utility.cpp" "CMakeFiles/Assignment04.dir/utility.cpp.o" "gcc" "CMakeFiles/Assignment04.dir/utility.cpp.o.d"
   "/home/manvi19472/Documents/ComputerGraphicsAssignments/Assignments/Assignment4/code/src/vector3D.cpp" "CMakeFiles/Assignment04.dir/vector3D.cpp.o" "gcc" "CMakeFiles/Assignment04.dir/vector3D.cpp.o.d"

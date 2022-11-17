@@ -19,6 +19,7 @@ bool Sphere::intersect(Ray& r) const
 			double t;
 			t = -b/(2.0*a);
 			r.setParameter(t, this);
+			r.setNormal(unitVector(r.getPosition() - position));
 			return true;
 		}
 		else
@@ -30,6 +31,7 @@ bool Sphere::intersect(Ray& r) const
 
 			bool b1 = r.setParameter(t1, this);
 			bool b2 = r.setParameter(t2, this);
+			r.setNormal(unitVector(r.getPosition() - position));
 
 			return b1||b2;    
 		}
@@ -37,3 +39,4 @@ bool Sphere::intersect(Ray& r) const
 	return false;
 
 }
+

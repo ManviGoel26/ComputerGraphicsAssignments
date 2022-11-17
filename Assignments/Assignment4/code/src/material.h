@@ -3,7 +3,6 @@
 #define _MATERIAL_H_
 
 #include "color.h"
-#include "world.h"
 #include "ray.h"
 
 class World;
@@ -28,7 +27,7 @@ public:
 		world(w), color(0),
 		ka(0), kd(0.0), ks(0), kr(0), kt(0),n(0), eta(0) {}
 	// Color shade(const Ray& incident, const bool isSolid) const;
-	Color shade(const Ray& incident, const bool isSolid, Vector3D normal, int depth) const;
+	Color shade(const Ray& incident, const bool isSolid, int depth) const;
 
 
 };

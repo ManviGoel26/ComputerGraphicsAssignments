@@ -32,6 +32,7 @@ public:
 	Vector3D getNormal() const {return normal;}
 	float getParameter() const {return t;}
 	bool setParameter(const float par, const Object *obj);
+	void setNormal(const Vector3D _normal);
 	bool didHit() const {return hit;}
 	const Object* intersected() const {return object;}
 	int getLevel() const {return level;}

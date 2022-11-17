@@ -5,7 +5,7 @@
 #include "object.h"
 #include "ray.h"
 #include "vector3D.h"
-// #include "color.h"
+#include "color.h"
 
 class Sphere : public Object
 {

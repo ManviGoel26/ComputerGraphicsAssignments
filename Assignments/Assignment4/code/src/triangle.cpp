@@ -1,16 +1,6 @@
 //triangle.cpp
 
-// #include "triangle.h"
-
 #include "imgui_setup.h"
-#include "camera.h"
-#include "renderengine.h"
-#include "world.h"
-#include "material.h"
-#include "object.h"
-#include "sphere.h"
-#include "lightsource.h"
-#include "pointlightsource.h"
 #include "triangle.h"
 
 bool Triangle::intersect(Ray& r) const
@@ -25,6 +15,7 @@ bool Triangle::intersect(Ray& r) const
     if (beta_gamma[0] > 0 && beta_gamma[1] > 0 && beta_gamma[0] + beta_gamma[1] < 1)
     {
         r.setParameter(beta_gamma[2], this);
+        r.setNormal(-1*crossProduct(b - a, c - a));
         return true;
     }
 	return false;

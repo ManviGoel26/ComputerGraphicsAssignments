@@ -27,6 +27,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/Assignment04.dir/ray.cpp.o.d"
   "CMakeFiles/Assignment04.dir/renderengine.cpp.o"
   "CMakeFiles/Assignment04.dir/renderengine.cpp.o.d"
+  "CMakeFiles/Assignment04.dir/sphere.cpp.o"
+  "CMakeFiles/Assignment04.dir/sphere.cpp.o.d"
   "CMakeFiles/Assignment04.dir/triangle.cpp.o"
   "CMakeFiles/Assignment04.dir/triangle.cpp.o.d"
   "CMakeFiles/Assignment04.dir/utility.cpp.o"

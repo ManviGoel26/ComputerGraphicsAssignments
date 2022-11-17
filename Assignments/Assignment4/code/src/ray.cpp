@@ -12,3 +12,8 @@ bool Ray::setParameter(const float par, const Object *obj)
 	}
 	return false;
 }
+
+void Ray::setNormal(const Vector3D _normal)
+{
+	normal = _normal;
+}

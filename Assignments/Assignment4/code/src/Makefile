@@ -441,6 +441,30 @@ renderengine.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Assignment04.dir/build.make CMakeFiles/Assignment04.dir/renderengine.cpp.s
 .PHONY : renderengine.cpp.s
 
+sphere.o: sphere.cpp.o
+.PHONY : sphere.o
+
+# target to build an object file
+sphere.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Assignment04.dir/build.make CMakeFiles/Assignment04.dir/sphere.cpp.o
+.PHONY : sphere.cpp.o
+
+sphere.i: sphere.cpp.i
+.PHONY : sphere.i
+
+# target to preprocess a source file
+sphere.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Assignment04.dir/build.make CMakeFiles/Assignment04.dir/sphere.cpp.i
+.PHONY : sphere.cpp.i
+
+sphere.s: sphere.cpp.s
+.PHONY : sphere.s
+
+# target to generate assembly for a file
+sphere.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Assignment04.dir/build.make CMakeFiles/Assignment04.dir/sphere.cpp.s
+.PHONY : sphere.cpp.s
+
 triangle.o: triangle.cpp.o
 .PHONY : triangle.o
 
@@ -585,6 +609,9 @@ help:
 	@echo "... renderengine.o"
 	@echo "... renderengine.i"
 	@echo "... renderengine.s"
+	@echo "... sphere.o"
+	@echo "... sphere.i"
+	@echo "... sphere.s"
 	@echo "... triangle.o"
 	@echo "... triangle.i"
 	@echo "... triangle.s"

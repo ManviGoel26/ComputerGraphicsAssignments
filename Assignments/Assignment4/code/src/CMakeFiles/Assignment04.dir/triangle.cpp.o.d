@@ -272,16 +272,10 @@ CMakeFiles/Assignment04.dir/triangle.cpp.o: \
  /usr/include/c++/7/bits/stl_bvector.h /usr/include/c++/7/bits/vector.tcc \
  /usr/include/GL/glew.h /usr/include/GL/glu.h /usr/include/GL/gl.h \
  /usr/include/GLFW/glfw3.h \
- /home/manvi19472/Documents/ComputerGraphicsAssignments/Assignments/Assignment4/code/src/camera.h \
+ /home/manvi19472/Documents/ComputerGraphicsAssignments/Assignments/Assignment4/code/src/triangle.h \
+ /home/manvi19472/Documents/ComputerGraphicsAssignments/Assignments/Assignment4/code/src/object.h \
+ /home/manvi19472/Documents/ComputerGraphicsAssignments/Assignments/Assignment4/code/src/ray.h \
  /home/manvi19472/Documents/ComputerGraphicsAssignments/Assignments/Assignment4/code/src/vector3D.h \
  /usr/include/c++/7/math.h \
  /home/manvi19472/Documents/ComputerGraphicsAssignments/Assignments/Assignment4/code/src/color.h \
- /home/manvi19472/Documents/ComputerGraphicsAssignments/Assignments/Assignment4/code/src/renderengine.h \
- /home/manvi19472/Documents/ComputerGraphicsAssignments/Assignments/Assignment4/code/src/world.h \
- /home/manvi19472/Documents/ComputerGraphicsAssignments/Assignments/Assignment4/code/src/object.h \
- /home/manvi19472/Documents/ComputerGraphicsAssignments/Assignments/Assignment4/code/src/ray.h \
- /home/manvi19472/Documents/ComputerGraphicsAssignments/Assignments/Assignment4/code/src/material.h \
- /home/manvi19472/Documents/ComputerGraphicsAssignments/Assignments/Assignment4/code/src/lightsource.h \
- /home/manvi19472/Documents/ComputerGraphicsAssignments/Assignments/Assignment4/code/src/sphere.h \
- /home/manvi19472/Documents/ComputerGraphicsAssignments/Assignments/Assignment4/code/src/pointlightsource.h \
- /home/manvi19472/Documents/ComputerGraphicsAssignments/Assignments/Assignment4/code/src/triangle.h
+ /home/manvi19472/Documents/ComputerGraphicsAssignments/Assignments/Assignment4/code/src/material.h

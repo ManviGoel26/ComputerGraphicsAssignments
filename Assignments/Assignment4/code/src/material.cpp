@@ -4,9 +4,9 @@
 #include<algorithm>
 #include "color.h"
 
-#define MAX_DEPTH 10
+#define MAX_DEPTH 3
 
-Color Material::shade(const Ray& incident, const bool isSolid, Vector3D normal, int depth) const
+Color Material::shade(const Ray& incident, const bool isSolid, int depth) const
 {
     Color obColor(0);
     Color ambient(color*ka);
@@ -15,6 +15,7 @@ Color Material::shade(const Ray& incident, const bool isSolid, Vector3D normal, 
     for (int i = 0; i < world->getLightSource().size(); i++)
     {
         bool shaded = false;
+        Vector3D normal = incident.getNormal();
         
         // Shadow Ray
 		Ray shadowRay(incident.getPosition(), world->getLightSource()[i]->getPosition()-incident.getPosition());
@@ -37,8 +38,7 @@ Color Material::shade(const Ray& incident, const bool isSolid, Vector3D normal, 
         spec_prod = std::pow(std::max(spec_prod, 0.0f), n);
         Color specular(world->getLightSource()[i]->getIntensity()*color);
         specular = specular*ks*spec_prod;
-        std::cout << dotProduct(normal, half) << "\n";
-
+        
 
         // Conditions for shaded
         if (!shaded) 
@@ -52,7 +52,6 @@ Color Material::shade(const Ray& incident, const bool isSolid, Vector3D normal, 
             Ray reflectedRay(incident.getPosition(), inc - normal*mm);
             Color c(world->shade_ray(reflectedRay, depth+1)*kr);
             obColor = obColor + c;
-            // std::cout << c.R()  << "this" << c.G() << " " << c.B() << " " << "\n"; 
         }
 
         
@@ -61,11 +60,9 @@ Color Material::shade(const Ray& incident, const bool isSolid, Vector3D normal, 
             Ray refractedRay(incident.getPosition(), eta*(inc - normal*dotProduct(inc, normal)) - normal*pow(1-(pow(eta, 2)*(1-pow(dotProduct(inc, normal), 2))), 0.5));
             Color rr(world->shade_ray(refractedRay, depth+1)*kt);
             obColor = obColor + rr;
-            std::cout << rr.R()  << "this" << rr.G() << " " << rr.B() << " " << "\n";
+            
         }
 	}
-
-    std::cout << obColor.R() << "\n";
 
     return obColor;
 }
