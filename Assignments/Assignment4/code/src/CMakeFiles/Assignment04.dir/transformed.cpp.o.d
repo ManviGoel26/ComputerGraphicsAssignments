@@ -1,7 +1,7 @@
-CMakeFiles/Assignment04.dir/sphere.cpp.o: \
- /home/manvi19472/Documents/ComputerGraphicsAssignments/Assignments/Assignment4/code/src/sphere.cpp \
+CMakeFiles/Assignment04.dir/transformed.cpp.o: \
+ /home/manvi19472/Documents/ComputerGraphicsAssignments/Assignments/Assignment4/code/src/transformed.cpp \
  /usr/include/stdc-predef.h \
- /home/manvi19472/Documents/ComputerGraphicsAssignments/Assignments/Assignment4/code/src/sphere.h \
+ /home/manvi19472/Documents/ComputerGraphicsAssignments/Assignments/Assignment4/code/src/transformed.h \
  /home/manvi19472/Documents/ComputerGraphicsAssignments/Assignments/Assignment4/code/src/object.h \
  /home/manvi19472/Documents/ComputerGraphicsAssignments/Assignments/Assignment4/code/src/ray.h \
  /usr/lib/gcc/x86_64-linux-gnu/7/include/float.h \

@@ -285,5 +285,7 @@ CMakeFiles/Assignment04.dir/main.cpp.o: \
  /home/manvi19472/Documents/ComputerGraphicsAssignments/Assignments/Assignment4/code/src/sphere.h \
  /home/manvi19472/Documents/ComputerGraphicsAssignments/Assignments/Assignment4/code/src/pointlightsource.h \
  /home/manvi19472/Documents/ComputerGraphicsAssignments/Assignments/Assignment4/code/src/triangle.h \
+ /home/manvi19472/Documents/ComputerGraphicsAssignments/Assignments/Assignment4/code/src/cylinder.h \
+ /home/manvi19472/Documents/ComputerGraphicsAssignments/Assignments/Assignment4/code/src/transformed.h \
  /home/manvi19472/Documents/ComputerGraphicsAssignments/Assignments/Assignment4/code/src/../depends/stb/stb_image.h \
  /home/manvi19472/Documents/ComputerGraphicsAssignments/Assignments/Assignment4/code/src/../depends/stb/stb_image_write.h

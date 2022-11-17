@@ -1,6 +1,8 @@
-CMakeFiles/Assignment04.dir/ray.cpp.o: \
- /home/manvi19472/Documents/ComputerGraphicsAssignments/Assignments/Assignment4/code/src/ray.cpp \
+CMakeFiles/Assignment04.dir/cylinder.cpp.o: \
+ /home/manvi19472/Documents/ComputerGraphicsAssignments/Assignments/Assignment4/code/src/cylinder.cpp \
  /usr/include/stdc-predef.h \
+ /home/manvi19472/Documents/ComputerGraphicsAssignments/Assignments/Assignment4/code/src/cylinder.h \
+ /home/manvi19472/Documents/ComputerGraphicsAssignments/Assignments/Assignment4/code/src/object.h \
  /home/manvi19472/Documents/ComputerGraphicsAssignments/Assignments/Assignment4/code/src/ray.h \
  /usr/lib/gcc/x86_64-linux-gnu/7/include/float.h \
  /home/manvi19472/Documents/ComputerGraphicsAssignments/Assignments/Assignment4/code/src/vector3D.h \
@@ -57,12 +59,14 @@ CMakeFiles/Assignment04.dir/ray.cpp.o: \
  /usr/include/x86_64-linux-gnu/bits/pthreadtypes-arch.h \
  /usr/include/alloca.h /usr/include/x86_64-linux-gnu/bits/stdlib-float.h \
  /usr/include/c++/7/typeinfo /usr/include/c++/7/bits/exception.h \
- /usr/include/c++/7/bits/hash_bytes.h /usr/include/c++/7/iostream \
- /usr/include/c++/7/ostream /usr/include/c++/7/ios \
- /usr/include/c++/7/iosfwd /usr/include/c++/7/bits/stringfwd.h \
- /usr/include/c++/7/bits/memoryfwd.h /usr/include/c++/7/bits/postypes.h \
- /usr/include/c++/7/cwchar /usr/include/wchar.h \
- /usr/lib/gcc/x86_64-linux-gnu/7/include/stdarg.h \
+ /usr/include/c++/7/bits/hash_bytes.h \
+ /home/manvi19472/Documents/ComputerGraphicsAssignments/Assignments/Assignment4/code/src/color.h \
+ /home/manvi19472/Documents/ComputerGraphicsAssignments/Assignments/Assignment4/code/src/material.h \
+ /usr/include/c++/7/iostream /usr/include/c++/7/ostream \
+ /usr/include/c++/7/ios /usr/include/c++/7/iosfwd \
+ /usr/include/c++/7/bits/stringfwd.h /usr/include/c++/7/bits/memoryfwd.h \
+ /usr/include/c++/7/bits/postypes.h /usr/include/c++/7/cwchar \
+ /usr/include/wchar.h /usr/lib/gcc/x86_64-linux-gnu/7/include/stdarg.h \
  /usr/include/x86_64-linux-gnu/bits/wchar.h \
  /usr/include/x86_64-linux-gnu/bits/types/wint_t.h \
  /usr/include/x86_64-linux-gnu/bits/types/mbstate_t.h \

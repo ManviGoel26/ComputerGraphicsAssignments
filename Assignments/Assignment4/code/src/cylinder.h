@@ -10,6 +10,7 @@
 class Cylinder : public Object
 {
 private:
+// Center, radius and height 
 	Vector3D center;
     double radius;
     double height;

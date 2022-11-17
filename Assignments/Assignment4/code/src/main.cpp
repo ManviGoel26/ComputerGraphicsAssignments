@@ -10,6 +10,9 @@
 #include "lightsource.h"
 #include "pointlightsource.h"
 #include "triangle.h"
+#include "cylinder.h"
+#include "transformed.h"
+#include <typeinfo>
 
 #define STB_IMAGE_IMPLEMENTATION
 #define STB_IMAGE_WRITE_IMPLEMENTATION
@@ -62,69 +65,45 @@ int main(int, char**)
     m2->eta = 1.52;
 
 
-//############### triagnle only rendered
-    Object *triangle1 = new Triangle(Vector3D(-1,0,2),Vector3D(0,3,1), Vector3D(5,0,-1),m2); 
-    world->addObject(triangle1);
+// triangle only rendered
+    // Object *triangle1 = new Triangle(Vector3D(-1,0,2),Vector3D(0,3,1), Vector3D(5,0,-1),m2); 
+    // world->addObject(triangle1);
 
-    Object *triangle2 = new Triangle(Vector3D(-5,-2,1),Vector3D(-3,4,-5), Vector3D(5,-3,-1),m); 
-    world->addObject(triangle2);
+    // Object *triangle2 = new Triangle(Vector3D(-5,-2,1),Vector3D(-3,4,-5), Vector3D(5,-3,-1),m); 
+    // world->addObject(triangle2);
+
+    // Cylinder - Bonus
     // Material *m1 = new Material(world);
-    // m1->color = Color(0.1, 0.7, 0.5);
-    // m1->ka = 0.1;
-    // m1->kd = 0.9;
+    // m1->color = Color(0.2, 0.3, 0.4);
+    // m1->ka = 0.2;
+    // m1->kd = 0.6;
     // m1->ks = 0.8;
     // m1->kr = 0.1;
     // m1->n = 1;
     
-    // // Object *sphere = new Sphere(Vector3D(2, 0, -10), 3, m1);
-    // // world->addObject(sphere);
-    // Object *triangle1 = new Triangle(Vector3D(1, 1, -12), Vector3D(1, 5, -24), Vector3D(-8, 5, -21), m1);
-    // world->addObject(triangle1);
+    // Object *cylinder = new Cylinder(Vector3D(-6, 4, -5), 1, 4, m1);
+    // world->addObject(cylinder);
 
-    // Material *m2 = new Material(world);
-    // m2->color = Color(0.7, 0.4, 0.9);
-    // m2->ka = 0.4;
-    // m2->kd = 0.5;
-    // m2->ks = 0.1;
-    // m2->n = 32;
-    // m2->kr = 0.1;
-    // m2->kt = 0.5;
-    // m2->eta = 1.5;
-    
 
     Material *m3 = new Material(world);
     m3->color = Color(0.1, 0.6, 0.9);
     m3->ka = 0.2;
     m3->kd = 0.2;
     m3->ks = 0.5;
-    // m3->n = 16;
-    // m3->kr = 0.3;
-    // m3->kt = 0.7;
-    // m3->eta = 1;
     
-    // Object *sphere = new Sphere(Vector3D(2, 4, -1), 1, m3);
-    // world->addObject(sphere);
+    // Sphere
+    Object *sphere = new Sphere(Vector3D(2, 4, -1), 1, m3);
+    world->addObject(sphere);
     
-    // Object *triangle3 = new Triangle(Vector3D(-25, 25, -25), Vector3D(-25, -25, -25), Vector3D(25, 25, -25), m3);
-    // world->addObject(triangle3);
+    // Transformed Primitives
+    // Object *transformedOb = new Transformed(sphere, m3);
+    // world->addObject(transformedOb);
 
-    // Material *m4 = new Material(world);
-    // m4->color = Color(0.0, 0.0, 0.0);
-    // // m4->ka = 0.9;
-    // // m4->kd = 0.1;
-    // // m4->ks = 0.1;
-    // // m4->n = 32;
-    // // m4->kr = 1;
-    
-    // Object *triangle4 = new Triangle(Vector3D(0, 0, 0), Vector3D(5, 0, -5), Vector3D(0, 0, -5), m4);
-    // world->addObject(triangle4);
+    LightSource *light1 = new PointLightSource(world, Vector3D(0, 0, -6), Color(1, 1, 1));
+    world->addLight(light1);
 
-
-    // LightSource *light1 = new PointLightSource(world, Vector3D(0, 0, -6), Color(1, 1, 1));
-    // world->addLight(light1);
-
-    LightSource *light2 = new PointLightSource(world, Vector3D(5, 10, 10), Color(1, 1, 1));
-    world->addLight(light2);
+    // LightSource *light2 = new PointLightSource(world, Vector3D(5, 10, 10), Color(1, 1, 1));
+    // world->addLight(light2);
 
     engine = new RenderEngine(world, camera);
 

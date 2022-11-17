@@ -21,5 +21,6 @@ Color World::shade_ray(Ray& ray, int depth)
 		Color obColor((ray.intersected())->shade(ray, depth));
 		return obColor;
 	}
+	
 	return background;
 }

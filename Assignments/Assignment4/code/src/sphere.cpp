@@ -1,6 +1,7 @@
 //sphere.cpp
 
 #include "sphere.h"
+#include "imgui_setup.h"
 
 bool Sphere::intersect(Ray& r) const
 {
@@ -39,4 +40,5 @@ bool Sphere::intersect(Ray& r) const
 	return false;
 
 }
+
 

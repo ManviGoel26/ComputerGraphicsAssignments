@@ -10,6 +10,7 @@
 class Triangle : public Object
 {
 private:
+// The three vertices.
 	Vector3D a;
 	Vector3D b;
     Vector3D c;

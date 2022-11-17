@@ -21,5 +21,6 @@ public:
 	}
 	
 	virtual bool intersect(Ray& r) const;
+	// virtual Ray& transform(Ray& ogRay) const;
 };
 #endif

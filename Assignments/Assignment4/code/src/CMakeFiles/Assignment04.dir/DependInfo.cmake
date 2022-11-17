@@ -10,6 +10,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/manvi19472/Documents/ComputerGraphicsAssignments/Assignments/Assignment4/code/src/camera.cpp" "CMakeFiles/Assignment04.dir/camera.cpp.o" "gcc" "CMakeFiles/Assignment04.dir/camera.cpp.o.d"
   "/home/manvi19472/Documents/ComputerGraphicsAssignments/Assignments/Assignment4/code/src/color.cpp" "CMakeFiles/Assignment04.dir/color.cpp.o" "gcc" "CMakeFiles/Assignment04.dir/color.cpp.o.d"
+  "/home/manvi19472/Documents/ComputerGraphicsAssignments/Assignments/Assignment4/code/src/cylinder.cpp" "CMakeFiles/Assignment04.dir/cylinder.cpp.o" "gcc" "CMakeFiles/Assignment04.dir/cylinder.cpp.o.d"
   "/home/manvi19472/Documents/ComputerGraphicsAssignments/Assignments/Assignment4/code/depends/imgui/imgui.cpp" "CMakeFiles/Assignment04.dir/depends/imgui/imgui.cpp.o" "gcc" "CMakeFiles/Assignment04.dir/depends/imgui/imgui.cpp.o.d"
   "/home/manvi19472/Documents/ComputerGraphicsAssignments/Assignments/Assignment4/code/depends/imgui/imgui_demo.cpp" "CMakeFiles/Assignment04.dir/depends/imgui/imgui_demo.cpp.o" "gcc" "CMakeFiles/Assignment04.dir/depends/imgui/imgui_demo.cpp.o.d"
   "/home/manvi19472/Documents/ComputerGraphicsAssignments/Assignments/Assignment4/code/depends/imgui/imgui_draw.cpp" "CMakeFiles/Assignment04.dir/depends/imgui/imgui_draw.cpp.o" "gcc" "CMakeFiles/Assignment04.dir/depends/imgui/imgui_draw.cpp.o.d"
@@ -22,6 +23,7 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/manvi19472/Documents/ComputerGraphicsAssignments/Assignments/Assignment4/code/src/ray.cpp" "CMakeFiles/Assignment04.dir/ray.cpp.o" "gcc" "CMakeFiles/Assignment04.dir/ray.cpp.o.d"
   "/home/manvi19472/Documents/ComputerGraphicsAssignments/Assignments/Assignment4/code/src/renderengine.cpp" "CMakeFiles/Assignment04.dir/renderengine.cpp.o" "gcc" "CMakeFiles/Assignment04.dir/renderengine.cpp.o.d"
   "/home/manvi19472/Documents/ComputerGraphicsAssignments/Assignments/Assignment4/code/src/sphere.cpp" "CMakeFiles/Assignment04.dir/sphere.cpp.o" "gcc" "CMakeFiles/Assignment04.dir/sphere.cpp.o.d"
+  "/home/manvi19472/Documents/ComputerGraphicsAssignments/Assignments/Assignment4/code/src/transformed.cpp" "CMakeFiles/Assignment04.dir/transformed.cpp.o" "gcc" "CMakeFiles/Assignment04.dir/transformed.cpp.o.d"
   "/home/manvi19472/Documents/ComputerGraphicsAssignments/Assignments/Assignment4/code/src/triangle.cpp" "CMakeFiles/Assignment04.dir/triangle.cpp.o" "gcc" "CMakeFiles/Assignment04.dir/triangle.cpp.o.d"
   "/home/manvi19472/Documents/ComputerGraphicsAssignments/Assignments/Assignment4/code/src/utility.cpp" "CMakeFiles/Assignment04.dir/utility.cpp.o" "gcc" "CMakeFiles/Assignment04.dir/utility.cpp.o.d"
   "/home/manvi19472/Documents/ComputerGraphicsAssignments/Assignments/Assignment4/code/src/vector3D.cpp" "CMakeFiles/Assignment04.dir/vector3D.cpp.o" "gcc" "CMakeFiles/Assignment04.dir/vector3D.cpp.o.d"

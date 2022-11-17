@@ -489,6 +489,30 @@ sphere.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Assignment04.dir/build.make CMakeFiles/Assignment04.dir/sphere.cpp.s
 .PHONY : sphere.cpp.s
 
+transformed.o: transformed.cpp.o
+.PHONY : transformed.o
+
+# target to build an object file
+transformed.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Assignment04.dir/build.make CMakeFiles/Assignment04.dir/transformed.cpp.o
+.PHONY : transformed.cpp.o
+
+transformed.i: transformed.cpp.i
+.PHONY : transformed.i
+
+# target to preprocess a source file
+transformed.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Assignment04.dir/build.make CMakeFiles/Assignment04.dir/transformed.cpp.i
+.PHONY : transformed.cpp.i
+
+transformed.s: transformed.cpp.s
+.PHONY : transformed.s
+
+# target to generate assembly for a file
+transformed.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Assignment04.dir/build.make CMakeFiles/Assignment04.dir/transformed.cpp.s
+.PHONY : transformed.cpp.s
+
 triangle.o: triangle.cpp.o
 .PHONY : triangle.o
 
@@ -639,6 +663,9 @@ help:
 	@echo "... sphere.o"
 	@echo "... sphere.i"
 	@echo "... sphere.s"
+	@echo "... transformed.o"
+	@echo "... transformed.i"
+	@echo "... transformed.s"
 	@echo "... triangle.o"
 	@echo "... triangle.i"
 	@echo "... triangle.s"
