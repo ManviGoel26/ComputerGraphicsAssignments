@@ -177,6 +177,30 @@ color.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Assignment04.dir/build.make CMakeFiles/Assignment04.dir/color.cpp.s
 .PHONY : color.cpp.s
 
+cylinder.o: cylinder.cpp.o
+.PHONY : cylinder.o
+
+# target to build an object file
+cylinder.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Assignment04.dir/build.make CMakeFiles/Assignment04.dir/cylinder.cpp.o
+.PHONY : cylinder.cpp.o
+
+cylinder.i: cylinder.cpp.i
+.PHONY : cylinder.i
+
+# target to preprocess a source file
+cylinder.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Assignment04.dir/build.make CMakeFiles/Assignment04.dir/cylinder.cpp.i
+.PHONY : cylinder.cpp.i
+
+cylinder.s: cylinder.cpp.s
+.PHONY : cylinder.s
+
+# target to generate assembly for a file
+cylinder.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Assignment04.dir/build.make CMakeFiles/Assignment04.dir/cylinder.cpp.s
+.PHONY : cylinder.cpp.s
+
 depends/imgui/imgui.o: depends/imgui/imgui.cpp.o
 .PHONY : depends/imgui/imgui.o
 
@@ -576,6 +600,9 @@ help:
 	@echo "... color.o"
 	@echo "... color.i"
 	@echo "... color.s"
+	@echo "... cylinder.o"
+	@echo "... cylinder.i"
+	@echo "... cylinder.s"
 	@echo "... depends/imgui/imgui.o"
 	@echo "... depends/imgui/imgui.i"
 	@echo "... depends/imgui/imgui.s"
