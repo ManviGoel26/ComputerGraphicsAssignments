@@ -21,7 +21,6 @@ private:
 	int level;//Number of times the ray has been traced recursively
 	float refractive_index;
 	Vector3D normal; //Normal of the hit object
-	Vector3D position;
 	
 
 public:  
@@ -32,7 +31,7 @@ public:
 	}
 	Vector3D getOrigin() const  {return origin;}
 	Vector3D getDirection() const  {return direction;}
-	Vector3D getPosition() const {return position;}
+	Vector3D getPosition() const {return origin + t*direction;}
 	void setPosition(Vector3D transformedPosition, const Object *obj);
 	Vector3D getNormal() const {return normal;}
 	float getParameter() const {return t;}

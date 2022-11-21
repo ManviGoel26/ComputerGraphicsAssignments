@@ -12,14 +12,12 @@ bool Transformed::intersect(Ray& r) const
 	Vector3D dir(newDr.x, newDr.y, newDr.z);
     Ray nr(origin, dir);
 	
-	// Intersect suing the new ray
+	// Intersect using the new ray
 	bool b = object->intersect(nr);
-
-	// Transofrm intersection
-	Vector3D post = nr.getPosition();
-	glm::vec3 newPost = transform*glm::vec4(post.e[0], post.e[1], post.e[2], 1.0f);
-	r.setPosition(Vector3D(newPost.x, newPost.y, newPost.z), this);
 	
+	// set Parameter
+	r.setParameter(nr.getParameter(), this);
+
 	// Transform Normal
 	glm::vec3 newNormal = glm::transpose(glm::inverse(transform))*glm::vec4(nr.getNormal().e[0], nr.getNormal().e[1], nr.getNormal().e[2], 1.0f);
 	r.setNormal(Vector3D(newNormal.x, newNormal.y, newNormal.z));
