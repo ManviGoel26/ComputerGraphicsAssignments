@@ -21,9 +21,20 @@ void main(void) {
 	//TODO
 	
         //refraction
+        float eta = 1.52;
+        float r = 1.0/eta;
+        vec3 refracted = refract(incident, fNormal, r);
+        refracted = vec3(model_inv* vec4(refracted, 0.0));
+        vec4 refractedColor = texture(cube_map, refracted);
 	
 	// Schlicks approximation
+        float r_s = pow((1 - eta)/(1 + eta), 2);
+        float shlick = r_s + (1 - r_s)*pow((1 + dot(fNormal, incident)), 5);
 	
-	//final color
-	fragColor = reflectedColor;
-}
+        //final color
+        // With shlick - final
+	fragColor = (1-shlick)*refractedColor + shlick*reflectedColor;
+
+        // Only refracted
+        // fragColor = refractedColor;
+}       
