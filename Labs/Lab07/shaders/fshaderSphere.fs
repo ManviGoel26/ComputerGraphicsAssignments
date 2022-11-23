@@ -28,8 +28,9 @@ void main(void) {
         vec4 refractedColor = texture(cube_map, refracted);
 	
 	// Schlicks approximation
-        float r_s = pow((1 - eta)/(1 + eta), 2);
-        float shlick = r_s + (1 - r_s)*pow((1 + dot(fNormal, incident)), 5);
+        // float r_s = pow((1 - eta)/(1 + eta), 2);
+        float r_s = ((1-eta)*(1-eta))/((1+eta)*(1+eta));
+        float shlick = r_s + (1 - r_s)*pow((1 - dot(-incident, fNormal)), 5);
 	
         //final color
         // With shlick - final
