@@ -21,7 +21,7 @@ public:
 	{
 
 		// Set transform matrix
-        glm::mat4 m = glm::mat4(glm::vec4(1.0f, -1.0f, 0.0f, 0.0f), glm::vec4(0.0f, 1.0f, 2.0f, 0.0f), glm::vec4(0.0f, 0.0f, 1.0f, 0.0f), glm::vec4(0.0f, 0.0f, 0.0f, 1.0f));
+        glm::mat4 m = glm::mat4(glm::vec4(1.0f, -1.0f, 0.0f, 0.0f), glm::vec4(1.0f, 0.0f, 0.0f, 0.0f), glm::vec4(0.0f, -2.0f, 1.0f, 0.0f), glm::vec4(0.0f, 0.0f, 0.0f, 1.0f));
         transform = m;
 	}
 	

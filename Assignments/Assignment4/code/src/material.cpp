@@ -4,7 +4,7 @@
 #include<algorithm>
 #include "color.h"
 
-#define MAX_DEPTH 3
+#define MAX_DEPTH 1
 
 Color Material::shade(const Ray& incident, const bool isSolid, int depth) const
 {

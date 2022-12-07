@@ -66,11 +66,11 @@ int main(int, char**)
 
 
 // triangle only rendered
-    Object *triangle1 = new Triangle(Vector3D(-1,0,2),Vector3D(0,3,1), Vector3D(5,0,-1),m2); 
-    world->addObject(triangle1);
+    // Object *triangle1 = new Triangle(Vector3D(-1,0,2),Vector3D(0,3,1), Vector3D(5,0,-1),m2); 
+    // world->addObject(triangle1);
 
-    Object *triangle2 = new Triangle(Vector3D(-5,-2,1),Vector3D(-3,4,-5), Vector3D(5,-3,-1),m); 
-    world->addObject(triangle2);
+    // Object *triangle2 = new Triangle(Vector3D(-5,-2,1),Vector3D(-3,4,-5), Vector3D(5,-3,-1),m); 
+    // world->addObject(triangle2);
 
     // Cylinder - Bonus
     // Material *m1 = new Material(world);
@@ -92,12 +92,12 @@ int main(int, char**)
     m3->ks = 0.5;
     
     // Sphere
-    // Object *sphere = new Sphere(Vector3D(2, 4, -1), 1, m3);
+    Object *sphere = new Sphere(Vector3D(2, 4, -1), 1, m3);
     // world->addObject(sphere);
     
-    // // Transformed Primitives
-    // Object *transformedOb = new Transformed(sphere, m3);
-    // world->addObject(transformedOb);
+    // Transformed Primitives
+    Object *transformedOb = new Transformed(sphere, m3);
+    world->addObject(transformedOb);
 
     // LightSource *light1 = new PointLightSource(world, Vector3D(0, 0, -6), Color(1, 1, 1));
     // world->addLight(light1);
