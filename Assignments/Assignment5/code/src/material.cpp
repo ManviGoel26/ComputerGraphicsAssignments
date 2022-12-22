@@ -56,7 +56,7 @@ Color Material::shade(const Ray& incident, const bool isSolid, int depth)
         Color diff1(world->getLightSource()[i]->getIntensity()*kd);
         
         // Set the base color using the texMap
-        color = getBaseColor(incident.getPosition());
+        // color = getBaseColor(incident.getPosition());
         Color diff2(color*std::max(diffuse_product, 0.0f));
         Color diffuse(diff1*diff2);
         

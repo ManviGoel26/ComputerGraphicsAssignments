@@ -61,6 +61,18 @@ int main(int, char**)
     World *world = new World;
     world->setAmbient(Color(1));
     world->setBackground(Color(0.1, 0.3, 0.6));
+
+    std::string filename = "src/texMap.jpg";
+    
+    int width, height;
+    std::vector<unsigned char> image;
+    bool success = load_image(image, filename, width, height);
+    if (!success)
+    {
+        std::cout << "Error loading image\n";
+        return 1;
+    }
+
     Material *m = new Material(world);
     m->color = Color(0.0, 1.0, 1.0);
     m->ka = 1;
@@ -88,24 +100,6 @@ int main(int, char**)
     // world->addObject(triangle2);
 
 
-    
-    // read_jpeg_header()
-    // Implicit Surface 
-    // Object *surface = new ImplicitSurface(m3);
-    // world->addObject(surface);
-    // LightSource *light1 = new PointLightSource(world, Vector3D(0, 0, 0), Color(9, 1, 1));
-    // world->addLight(light1);
-    std::string filename = "src/texMap.jpg";
-    
-    int width, height;
-    std::vector<unsigned char> image;
-    bool success = load_image(image, filename, width, height);
-    if (!success)
-    {
-        std::cout << "Error loading image\n";
-        return 1;
-    }
-
     Material *m3 = new Material(world);
     m3->color = Color(0.2, 1.0, 1.0);
     m3->ka = 0.3;
@@ -118,14 +112,17 @@ int main(int, char**)
     m3->im_height = height;
     
     // Sphere
-    Object *sphere = new Sphere(Vector3D(-1, 0, 0), 1, m3);
-    world->addObject(sphere);
+    // Object *sphere = new Sphere(Vector3D(-1, 0, 0), 1, m3);
+    // world->addObject(sphere);
     
     
-    // std::cout << "Image width = " << width << '\n';
-    // std::cout << "Image height = " << height << '\n';
+    // Implicit Surface 
+    Object *surface = new ImplicitSurface(m3);
+    world->addObject(surface);
     
-
+    // LightSource *light1 = new PointLightSource(world, Vector3D(0, 0, 0), Color(9, 1, 1));
+    // world->addLight(light1);
+    
     LightSource *light2 = new PointLightSource(world, Vector3D(5, 10, 10), Color(1, 1, 1));
     world->addLight(light2);
 
