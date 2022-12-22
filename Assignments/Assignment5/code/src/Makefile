@@ -57,10 +57,10 @@ RM = /usr/local/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/manvi19472/Documents/ComputerGraphicsAssignments/Assignments/Assignment4/code
+CMAKE_SOURCE_DIR = /home/manvi19472/Documents/ComputerGraphicsAssignments/Assignments/Assignment5/code
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/manvi19472/Documents/ComputerGraphicsAssignments/Assignments/Assignment4/code/src
+CMAKE_BINARY_DIR = /home/manvi19472/Documents/ComputerGraphicsAssignments/Assignments/Assignment5/code/src
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -87,9 +87,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/manvi19472/Documents/ComputerGraphicsAssignments/Assignments/Assignment4/code/src/CMakeFiles /home/manvi19472/Documents/ComputerGraphicsAssignments/Assignments/Assignment4/code/src//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/manvi19472/Documents/ComputerGraphicsAssignments/Assignments/Assignment5/code/src/CMakeFiles /home/manvi19472/Documents/ComputerGraphicsAssignments/Assignments/Assignment5/code/src//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/manvi19472/Documents/ComputerGraphicsAssignments/Assignments/Assignment4/code/src/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/manvi19472/Documents/ComputerGraphicsAssignments/Assignments/Assignment5/code/src/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -368,6 +368,30 @@ imgui_setup.s: imgui_setup.cpp.s
 imgui_setup.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Assignment04.dir/build.make CMakeFiles/Assignment04.dir/imgui_setup.cpp.s
 .PHONY : imgui_setup.cpp.s
+
+implicitSurface.o: implicitSurface.cpp.o
+.PHONY : implicitSurface.o
+
+# target to build an object file
+implicitSurface.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Assignment04.dir/build.make CMakeFiles/Assignment04.dir/implicitSurface.cpp.o
+.PHONY : implicitSurface.cpp.o
+
+implicitSurface.i: implicitSurface.cpp.i
+.PHONY : implicitSurface.i
+
+# target to preprocess a source file
+implicitSurface.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Assignment04.dir/build.make CMakeFiles/Assignment04.dir/implicitSurface.cpp.i
+.PHONY : implicitSurface.cpp.i
+
+implicitSurface.s: implicitSurface.cpp.s
+.PHONY : implicitSurface.s
+
+# target to generate assembly for a file
+implicitSurface.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Assignment04.dir/build.make CMakeFiles/Assignment04.dir/implicitSurface.cpp.s
+.PHONY : implicitSurface.cpp.s
 
 main.o: main.cpp.o
 .PHONY : main.o
@@ -648,6 +672,9 @@ help:
 	@echo "... imgui_setup.o"
 	@echo "... imgui_setup.i"
 	@echo "... imgui_setup.s"
+	@echo "... implicitSurface.o"
+	@echo "... implicitSurface.i"
+	@echo "... implicitSurface.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

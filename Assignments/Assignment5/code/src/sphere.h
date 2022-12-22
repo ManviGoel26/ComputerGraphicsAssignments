@@ -6,6 +6,8 @@
 #include "ray.h"
 #include "vector3D.h"
 #include "color.h"
+#include <vector>
+
 
 class Sphere : public Object
 {
@@ -22,5 +24,7 @@ public:
 	
 	virtual bool intersect(Ray& r) const;
 	// virtual Ray& transform(Ray& ogRay) const;
+	// std::vector<float> getUVMapping(Vector3D p);
+
 };
 #endif

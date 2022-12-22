@@ -19,6 +19,7 @@ public:
 	{
 		return material->shade(ray, isSolid, depth);
 	}
+	// std::vector<float> getUVMapping(Vector3D p);
 
 };
 

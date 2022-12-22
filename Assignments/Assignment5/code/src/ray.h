@@ -40,6 +40,7 @@ public:
 	bool didHit() const {return hit;}
 	const Object* intersected() const {return object;}
 	int getLevel() const {return level;}
+	// std::vector<float> getMapping(Vector3D p) {return object->getUVMapping(p);}
 
 
 };

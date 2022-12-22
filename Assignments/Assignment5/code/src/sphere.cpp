@@ -3,6 +3,19 @@
 #include "sphere.h"
 #include "imgui_setup.h"
 
+// std::vector<float> getUVMapping(Vector3D p)
+// {	
+//     double x = p.e[0];
+//     double y = p.e[1];
+//     double z = p.e[2];
+
+// 	float u = 0.5 + atan2(z, x)/2*glm::pi<float>();
+// 	float v = 0.5 - asin(y)/glm::pi<float>();
+
+// 	std::vector<float> ret = {u, v};
+// 	return ret;
+// }
+
 bool Sphere::intersect(Ray& r) const
 {
 	Vector3D centerVector = r.getOrigin() - position;

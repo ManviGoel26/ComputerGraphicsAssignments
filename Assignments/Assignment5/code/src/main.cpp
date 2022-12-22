@@ -10,9 +10,11 @@
 #include "lightsource.h"
 #include "pointlightsource.h"
 #include "triangle.h"
-#include "cylinder.h"
+#include "cylinder.h"   
 #include "transformed.h"
+#include "implicitSurface.h"
 #include <typeinfo>
+
 
 #define STB_IMAGE_IMPLEMENTATION
 #define STB_IMAGE_WRITE_IMPLEMENTATION
@@ -27,6 +29,19 @@ RenderEngine *engine;
 int screen_width = 800, screen_height = 600; // This is window size, used to display scaled raytraced image.
 int image_width = 1920, image_height = 1080; // This is raytraced image size. Change it if needed.
 GLuint texImage;
+
+bool load_image(std::vector<unsigned char>& image, const std::string& filename, int& x, int&y)
+{
+    int n;
+    unsigned char* data = stbi_load(filename.c_str(), &x, &y, &n, 0);
+    // std::cout << n << "\n";
+    if (data != nullptr)
+    {
+        image = std::vector<unsigned char>(data, data + x*y*3);
+    }
+    stbi_image_free(data);
+    return (data != nullptr);
+}
 
 int main(int, char**)
 {
@@ -47,63 +62,72 @@ int main(int, char**)
     world->setAmbient(Color(1));
     world->setBackground(Color(0.1, 0.3, 0.6));
     Material *m = new Material(world);
-    m->color = Color(0.0, 0.0, 0.0);
-    // m->ka = 0.5;
-    // m->kd = 0.07;
-    // m->n = 4.0;
+    m->color = Color(0.0, 1.0, 1.0);
+    m->ka = 1;
+    m->kd = 0.07;
+    m->n = 4.0;
     m->ks = 0.6;
-    m->kr = 0.4;
+    // m->kt = 1.0;
 
     Material *m2 = new Material(world);
     m2->color = Color(0.1, 0.2, 0.6);
-    m2->ka = 0.5;
-    m2->kd = 0.07;
-    m2->n = 64.0;
-    m2->ks = 0.8;
+    // m2->ka = 0.5;
+    // m2->kd = 0.07;
+    // m2->n = 64.0;
+    // m2->ks = 0.8;
     m2->kr = 0.6;
-    m2->kt = 1;
-    m2->eta = 1.52;
+    // m2->kt = 1;
+    // m2->eta = 1.52;
 
 
-// triangle only rendered
-    Object *triangle1 = new Triangle(Vector3D(-1,0,2),Vector3D(0,3,1), Vector3D(5,0,-1),m2); 
-    world->addObject(triangle1);
+    // // triangle only rendered
+    // Object *triangle1 = new Triangle(Vector3D(-1,0,2),Vector3D(0,3,1), Vector3D(5,0,-1),m2); 
+    // world->addObject(triangle1);
 
-    Object *triangle2 = new Triangle(Vector3D(-5,-2,1),Vector3D(-3,4,-5), Vector3D(5,-3,-1),m); 
-    world->addObject(triangle2);
+    // Object *triangle2 = new Triangle(Vector3D(-5,-2,1),Vector3D(-3,4,-5), Vector3D(5,-3,-1),m); 
+    // world->addObject(triangle2);
 
-    // Cylinder - Bonus
-    // Material *m1 = new Material(world);
-    // m1->color = Color(0.2, 0.3, 0.4);
-    // m1->ka = 0.2;
-    // m1->kd = 0.6;
-    // m1->ks = 0.8;
-    // m1->kr = 0.1;
-    // m1->n = 1;
+
     
-    // Object *cylinder = new Cylinder(Vector3D(-6, 4, -5), 1, 4, m1);
-    // world->addObject(cylinder);
-
+    // read_jpeg_header()
+    // Implicit Surface 
+    // Object *surface = new ImplicitSurface(m3);
+    // world->addObject(surface);
+    // LightSource *light1 = new PointLightSource(world, Vector3D(0, 0, 0), Color(9, 1, 1));
+    // world->addLight(light1);
+    std::string filename = "src/texMap.jpg";
+    
+    int width, height;
+    std::vector<unsigned char> image;
+    bool success = load_image(image, filename, width, height);
+    if (!success)
+    {
+        std::cout << "Error loading image\n";
+        return 1;
+    }
 
     Material *m3 = new Material(world);
-    m3->color = Color(0.1, 0.6, 0.9);
-    m3->ka = 0.2;
+    m3->color = Color(0.2, 1.0, 1.0);
+    m3->ka = 0.3;
+    // m3->kt = 1;
+    // m3->eta = 1.53;
     m3->kd = 0.2;
     m3->ks = 0.5;
+    m3->image = image;
+    m3->im_width = width;
+    m3->im_height = height;
     
     // Sphere
     Object *sphere = new Sphere(Vector3D(-1, 0, 0), 1, m3);
     world->addObject(sphere);
     
-    // // Transformed Primitives
-    // Object *transformedOb = new Transformed(sphere, m3);
-    // world->addObject(transformedOb);
+    
+    // std::cout << "Image width = " << width << '\n';
+    // std::cout << "Image height = " << height << '\n';
+    
 
-    LightSource *light1 = new PointLightSource(world, Vector3D(0, 0, 0), Color(1, 1, 1));
-    world->addLight(light1);
-
-    // LightSource *light2 = new PointLightSource(world, Vector3D(5, 10, 10), Color(1, 1, 1));
-    // world->addLight(light2);
+    LightSource *light2 = new PointLightSource(world, Vector3D(5, 10, 10), Color(1, 1, 1));
+    world->addLight(light2);
 
     engine = new RenderEngine(world, camera);
 

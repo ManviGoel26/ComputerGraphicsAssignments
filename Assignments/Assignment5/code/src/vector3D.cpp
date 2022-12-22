@@ -44,6 +44,12 @@ Vector3D operator/(const Vector3D& v, double scalar)
 	return Vector3D(v.e[0]/scalar, v.e[1]/scalar, v.e[2]/scalar);   
 }
 
+
+Vector3D operator+(const Vector3D& v, double scalar)
+{
+	return Vector3D(v.e[0]+scalar, v.e[1]+scalar, v.e[2]+scalar);   
+}
+
 Vector3D operator*(const Vector3D& v, double scalar)
 {
 	return Vector3D(v.e[0]*scalar, v.e[1]*scalar, v.e[2]*scalar);       

@@ -27,6 +27,7 @@ public:
 	friend bool operator!=(const Vector3D& v1, const Vector3D& v2);
 	friend Vector3D operator+(const Vector3D& v1, const Vector3D& v2);
 	friend Vector3D operator-(const Vector3D& v1, const Vector3D& v2);
+	friend Vector3D operator+(const Vector3D& v, double scalar);
 	friend Vector3D operator/(const Vector3D& v, double scalar);
 	friend Vector3D operator*(const Vector3D& v, double scalar);
 	friend Vector3D operator*(double scalar, const Vector3D& v);
