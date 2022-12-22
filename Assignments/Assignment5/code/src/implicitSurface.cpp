@@ -74,7 +74,7 @@ bool ImplicitSurface::intersect(Ray& r) const
                     break;
                 }
                 
-                if (fabs(signedDistance) < 1)
+                if (fabs(signedDistance) < 0.1)
                 {
                     float t_final = ((m - o).e[0])/d.e[0];
                     r.setParameter(t_final, this);

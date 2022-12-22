@@ -22,6 +22,7 @@ set(SOURCES
 		"src/sphere.cpp"
 		"src/triangle.cpp"
 		"src/transformed.cpp"
+		"src/implicitSurface.cpp"
 		"src/cylinder.cpp"
 		"src/utility.cpp"
 		"src/vector3D.cpp"

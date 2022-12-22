@@ -57,18 +57,18 @@ RM = /usr/local/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/manvi19472/Documents/ComputerGraphicsAssignments/Assignments/Assignment5/code
+CMAKE_SOURCE_DIR = /home/jahnvi19469/ComputerGraphicsAssignments/Assignments/Assignment5/code
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/manvi19472/Documents/ComputerGraphicsAssignments/Assignments/Assignment5/code/src
+CMAKE_BINARY_DIR = /home/jahnvi19469/ComputerGraphicsAssignments/Assignments/Assignment5/code/src
 
 #=============================================================================
 # Targets provided globally by CMake.
 
 # Special rule for the target edit_cache
 edit_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	/usr/local/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake cache editor..."
+	/usr/local/bin/ccmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -87,9 +87,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/manvi19472/Documents/ComputerGraphicsAssignments/Assignments/Assignment5/code/src/CMakeFiles /home/manvi19472/Documents/ComputerGraphicsAssignments/Assignments/Assignment5/code/src//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/jahnvi19469/ComputerGraphicsAssignments/Assignments/Assignment5/code/src/CMakeFiles /home/jahnvi19469/ComputerGraphicsAssignments/Assignments/Assignment5/code/src//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/manvi19472/Documents/ComputerGraphicsAssignments/Assignments/Assignment5/code/src/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/jahnvi19469/ComputerGraphicsAssignments/Assignments/Assignment5/code/src/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
