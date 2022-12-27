@@ -1,5 +1,6 @@
 # Computer Graphics Labs and Assignments
-Assignments and Labs for the course Computer Graphics (CSE333) IIIT Delhi Monsoon 22 under the guidance of Dr. Ojaswa Sharma. 
+Assignments and Labs for the course Computer Graphics (CSE333) IIIT Delhi Monsoon 22
+
 
 ## Assignments
 ### 1. Shape Modelling. 
@@ -26,3 +27,21 @@ Implement texture mapping for sphere and raytracing for implicit surface using t
 5. Find the point of intersection for the Ray and Sphere.
 6. Apply texture to the cube using texture coordinates.
 7. Add Refraction and Schlicks Approximation for a Cubemap.   
+
+## Instructions
+For each assignment or lab code,
+'''
+cd code/src
+cmake ..
+make
+'''
+
+This will generate the application file in the *code* folder.
+Note:- If *cmake ..* gives an error, delete *CmakeCache.txt* from the *src* folder.
+
+## Details
+Course Assignments for Computer Graphics (CSE333) 
+Instructor : Dr. Ojaswa Sharma
+
+Skills Used : OpenGL, GLSL, GLM, Rendering Pipeline
+
