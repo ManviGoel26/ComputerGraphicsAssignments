@@ -30,11 +30,10 @@ Implement texture mapping for sphere and raytracing for implicit surface using t
 
 ## Instructions
 For each assignment or lab code,
-'''
-cd code/src
-cmake ..
-make
-'''
+	cd code/src
+	cmake ..
+	make
+
 
 This will generate the application file in the *code* folder.
 Note:- If *cmake ..* gives an error, delete *CmakeCache.txt* from the *src* folder.
