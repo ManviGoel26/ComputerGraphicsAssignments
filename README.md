@@ -37,6 +37,7 @@ For each assignment or lab code,
 
 
 This will generate the application file in the *code* folder.
+
 Note:- If *cmake ..* gives an error, delete *CmakeCache.txt* from the *src* folder.
 
 ## Details
