@@ -30,6 +30,7 @@ Implement texture mapping for sphere and raytracing for implicit surface using t
 
 ## Instructions
 For each assignment or lab code,
+
 	cd code/src
 	cmake ..
 	make
