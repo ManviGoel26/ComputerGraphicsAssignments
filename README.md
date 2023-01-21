@@ -39,6 +39,7 @@ For each assignment or lab code,
 This will generate the application file in the *code* folder.
 
 Note:- If *cmake ..* gives an error, delete *CmakeCache.txt* from the *src* folder.
+Detailed Instructions, Report and Sample Outputs are given inside each folder. 
 
 ## Details
 Course Assignments for Computer Graphics (CSE333) 
